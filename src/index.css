@@ -5,6 +5,8 @@
 
 
 @import "tailwindcss";
+@plugin "daisyui";
+
 
 
 

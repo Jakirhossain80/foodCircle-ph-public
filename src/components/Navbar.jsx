@@ -112,12 +112,12 @@ const Navbar = () => {
               alt="User"
               className="h-10 w-10 rounded-full border-2 border-green-500 cursor-pointer"
             />
-            {showDropdown && (
-              <div className="absolute right-0 mt-2 bg-white border p-3 shadow-md rounded text-sm w-44">
+            {user && showDropdown && (
+              <div className="absolute right-0 bg-white border border-gray-200 p-3 shadow-md rounded text-sm w-44">
                 <p className="font-medium text-gray-800">{user.displayName}</p>
                 <button
                   onClick={handleLogout}
-                  className="mt-2 w-full text-left text-rose-500 hover:text-rose-600"
+                  className="mt-2 w-full text-left text-rose-500 hover:text-rose-600 cursor-pointer"
                 >
                   Logout
                 </button>

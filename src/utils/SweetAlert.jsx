@@ -26,7 +26,7 @@ export const showConfirmDialog = async (message = 'Are you sure?') => {
     title: message,
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
+    confirmButtonColor: '#059669',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Yes!',
   });

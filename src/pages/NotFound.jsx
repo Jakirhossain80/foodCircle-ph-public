@@ -16,7 +16,7 @@ const NotFound = () => {
       {/* Button */}
       <Link
         to="/"
-        className="bg-indigo-500 text-white px-6 py-2 mt-6 rounded hover:bg-indigo-600 transition duration-300"
+        className="bg-green-600 text-white px-6 py-2 mt-6 rounded hover:bg-green-700 transition duration-300"
       >
         Go Back Home
       </Link>

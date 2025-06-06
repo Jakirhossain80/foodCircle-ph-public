@@ -30,7 +30,9 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          isActive ? "text-green-600 font-semibold" : ""
+          `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
         }
       >
         Home
@@ -38,7 +40,9 @@ const Navbar = () => {
       <NavLink
         to="/availablefoods"
         className={({ isActive }) =>
-          isActive ? "text-green-600 font-semibold" : ""
+          `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
         }
       >
         Available Foods
@@ -46,7 +50,9 @@ const Navbar = () => {
       <NavLink
         to="/addfood"
         className={({ isActive }) =>
-          isActive ? "text-green-600 font-semibold" : ""
+          `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
         }
       >
         Add Food
@@ -54,7 +60,9 @@ const Navbar = () => {
       <NavLink
         to="/managemyfoods"
         className={({ isActive }) =>
-          isActive ? "text-green-600 font-semibold" : ""
+          `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
         }
       >
         Manage My Foods
@@ -62,7 +70,9 @@ const Navbar = () => {
       <NavLink
         to="/myfoodrequest"
         className={({ isActive }) =>
-          isActive ? "text-green-600 font-semibold" : ""
+          `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
         }
       >
         My Food Request
@@ -145,7 +155,9 @@ const Navbar = () => {
               to="/"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? "text-green-600 font-semibold" : ""
+                `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
               }
             >
               Home
@@ -154,7 +166,9 @@ const Navbar = () => {
               to="/availablefoods"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? "text-green-600 font-semibold" : ""
+                `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
               }
             >
               Available Foods
@@ -163,7 +177,9 @@ const Navbar = () => {
               to="/addfood"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? "text-green-600 font-semibold" : ""
+                `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
               }
             >
               Add Food
@@ -172,7 +188,9 @@ const Navbar = () => {
               to="/managemyfoods"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? "text-green-600 font-semibold" : ""
+                `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
               }
             >
               Manage My Foods
@@ -181,7 +199,9 @@ const Navbar = () => {
               to="/myfoodrequest"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                isActive ? "text-green-600 font-semibold" : ""
+                `hover:text-green-600 transition-all ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
               }
             >
               My Food Request
@@ -222,7 +242,7 @@ const Navbar = () => {
                 <p className="font-medium">{user.displayName}</p>
                 <button
                   onClick={handleLogout}
-                  className="text-rose-500 hover:text-rose-600 text-sm"
+                  className="text-rose-500 hover:text-rose-600 text-sm cursor-pointer"
                 >
                   Logout
                 </button>

@@ -5,12 +5,19 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { motion } from "framer-motion";
 import logoImage from "../assets/logo-food.png";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-50 text-gray-800 border-t border-gray-200 mt-10">
-      <div className="max-w-7xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3">
+      <motion.div
+        className="max-w-7xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1.0, ease: "easeOut" }}
+      >
         {/* Logo & Tagline */}
         <div>
           <Link to="/" className="flex items-center gap-2 mb-3">
@@ -88,7 +95,9 @@ const Footer = () => {
             Follow Us
           </h3>
           <div className="flex gap-4 mt-2">
-            <a
+            <motion.a
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -96,8 +105,10 @@ const Footer = () => {
               className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
             >
               <FaFacebookF />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -105,8 +116,10 @@ const Footer = () => {
               className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
             >
               <FaTwitter />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -114,8 +127,10 @@ const Footer = () => {
               className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
             >
               <FaInstagram />
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.95 }}
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -123,10 +138,10 @@ const Footer = () => {
               className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
             >
               <FaLinkedinIn />
-            </a>
+            </motion.a>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Bottom Bar */}
       <div className="border-t border-gray-200 text-center py-4 text-sm text-gray-600 font-inter">

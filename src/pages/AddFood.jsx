@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../firebase.config";
 import Loading from "../utils/Loading";
-import axios from "axios"; // ✅ Axios added
+import axios from "axios";
 
 const auth = getAuth(app);
 
@@ -29,6 +29,7 @@ const AddFood = () => {
           ...prev,
           userName: user.displayName || "Anonymous",
           userEmail: user.email,
+           userImage: user.photoURL,
         }));
       }
       setLoading(false);

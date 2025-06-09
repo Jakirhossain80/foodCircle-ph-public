@@ -81,7 +81,10 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white border-gray-200 px-4 py-3 flex justify-between items-center relative z-50">
+  <nav className="fixed top-0 left-0 right-0 w-full container bg-white border-gray-200 px-4 py-10 flex justify-between items-center z-50">
+
+
+
       {/* Logo and Title */}
       <Link to="/" className="flex items-center gap-2">
         <img src={logoImage} alt="Logo" className="h-8 w-8" />

@@ -95,7 +95,7 @@ const FeaturedFoods = () => {
       >
         <Link
           to="/availablefoods"
-          className="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-xl transition"
+          className="inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-8 rounded-full transition"
         >
           Show All
         </Link>

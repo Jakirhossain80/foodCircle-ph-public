@@ -11,7 +11,7 @@ import MyFoodRequest from "../pages/MyFoodRequest";
 import FoodDetails from "../pages/FoodDetails";
 import UpdateFoodInfo from "../pages/UpdateFoodInfo";
 import LearnMore from "../pages/LearnMore";
-
+import PrivateRoute from "../provider/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -32,41 +32,56 @@ export const router = createBrowserRouter([
       {
         path: "/registration",
         Component: Registration,
-      },        
+      },
       {
         path: "/availablefoods",
         Component: AvailableFoods,
-      },        
+      },
       {
         path: "/addfood",
-        element: <AddFood/>,
-      },        
+        element: (
+          <PrivateRoute>
+            <AddFood />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/managemyfoods",
-        element: <ManageMyFoods/>,
-      },        
+        element: (
+          <PrivateRoute>
+            <ManageMyFoods />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/myfoodrequest",
-        element: <MyFoodRequest/>,
-      },        
+        element: (
+          <PrivateRoute>
+            <MyFoodRequest />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/food/:id",
-        element: <FoodDetails/>,
-      },        
+        element: (
+          <PrivateRoute>
+            <FoodDetails />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/updatefood/:id",
-        element: <UpdateFoodInfo/>,
-      },        
+        element: <UpdateFoodInfo />,
+      },
       {
         path: "/learnmore",
-        element: <LearnMore/>,
-      },        
-      
+        element: <LearnMore />,
+      },
+
       {
         path: "/*",
         element: <NotFound />,
       },
     ],
   },
-  
 ]);

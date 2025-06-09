@@ -16,9 +16,12 @@ const AvailableFoods = () => {
   const fetchFoods = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3000/available-foods`, {
-        params: { search: searchQuery, sort: sortOrder },
-      });
+      const response = await axios.get(
+        `http://localhost:3000/available-foods`,
+        {
+          params: { search: searchQuery, sort: sortOrder },
+        }
+      );
       setFoods(response.data);
     } catch (err) {
       console.error("Failed to fetch foods:", err);
@@ -69,24 +72,25 @@ const AvailableFoods = () => {
           <input
             type="text"
             placeholder="Search food name..."
-            className="input input-bordered w-full md:w-64 border-green-500"
+            className="input input-bordered w-full md:w-64 border-green-500 focus:outline  focus:outline-green-600"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyPress}
           />
+
           <button
             onClick={handleSearchClick}
-            className="btn border-green-400 text-green-500 hover:bg-green-400 hover:text-white flex items-center"
+            className="btn border-green-400 text-green-500 hover:bg-green-400 hover:text-white flex items-center group"
             title="Search"
             disabled={isTyping}
           >
-            <FaSearch className="text-green-500" /> Search
+            <FaSearch className="text-green-500 group-hover:text-white transition-colors duration-200" />{" "}
+            Search
           </button>
         </div>
 
         {/* Sort */}
-        <div className="flex items-center gap-2">
-          <FaSort className="text-amber-500" />
+        <div>
           <select
             className="select select-bordered border-green-500 focus:border-green-600 focus:ring-green-500"
             value={sortOrder}
@@ -115,24 +119,24 @@ const AvailableFoods = () => {
         <div
           className={`grid gap-6 ${
             isGridThree
-              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+              ? "grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
               : "grid-cols-1 md:grid-cols-2"
           }`}
         >
           {foods.length === 0 ? (
-            <p className="col-span-full text-center text-gray-500">
+            <p className="col-span-full text-2xl font-semibold text-center text-amber-500">
               No food items found.
             </p>
           ) : (
             foods.map((food) => (
               <div
                 key={food._id}
-                className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200 flex flex-col"
+                className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 flex flex-col px-4 py-6"
               >
                 <img
                   src={food.foodImage}
                   alt={food.foodName}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-72 object-cover rounded-sm"
                 />
                 <div className="p-4 flex flex-col gap-2 flex-1">
                   <h2 className="text-xl font-semibold">{food.foodName}</h2>

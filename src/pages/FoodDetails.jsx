@@ -1,13 +1,19 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 import Loading from "../utils/Loading";
 import { FaMapMarkerAlt, FaClock, FaUserAlt, FaEnvelope } from "react-icons/fa";
+import { AuthContext } from "../provider/AuthProvider";
 
 const FoodDetails = () => {
   const { id } = useParams();
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [notes, setNotes] = useState("");
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFood = async () => {
@@ -23,6 +29,36 @@ const FoodDetails = () => {
 
     fetchFood();
   }, [id]);
+
+  const handleRequestFood = async () => {
+    const requestData = {
+      foodId: food._id,
+      foodName: food.foodName,
+      foodImage: food.foodImage,
+      donorName: food.donorName,
+      donorEmail: food.donorEmail,
+      userEmail: user.email,
+      location: food.location,
+      expireAt: food.expireAt,
+      requestDate: new Date().toISOString(),
+      notes,
+    };
+
+    try {
+      await axios.patch(`http://localhost:3000/food/${food._id}`, {
+        foodStatus: "requested",
+      });
+
+      await axios.post("http://localhost:3000/requests", requestData);
+
+      Swal.fire("Success", "Food request submitted!", "success");
+      setShowModal(false);
+      navigate("/myfoodrequest");
+    } catch (error) {
+      console.error("Request failed:", error);
+      Swal.fire("Error", "Failed to submit request", "error");
+    }
+  };
 
   if (loading) return <Loading />;
 
@@ -126,9 +162,97 @@ const FoodDetails = () => {
             </div>
           </div>
         </div>
+
+        {/* Make a Request Button */}
+        {foodStatus === "Available" && user?.email && (
+          <div className="flex justify-end mt-6">
+            <button
+              onClick={() => setShowModal(true)}
+              className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-full transition duration-200 cursor-pointer"
+            >
+              Make a Request
+            </button>
+          </div>
+        )}
       </div>
+
+      
+      
+      
+      {/* Modal */}
+     {showModal && (
+  <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-xs flex items-center justify-center">
+    <div className="bg-gray-50 border border-gray-200 rounded-lg px-8 py-10 w-full max-w-2xl space-y-4 inset-shadow-xl relative">
+      <h2 className="text-2xl font-bold font-poppins text-green-600 text-center">
+        Request This Food
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-4 text-sm">
+        <Field label="Food Name" value={foodName} />
+        {/* Removed Field for Food ID */}
+        <Field label="Donor Name" value={donorName} />
+        <Field label="Donor Email" value={donorEmail} />
+        <Field label="Pickup Location" value={location} />
+        <Field
+          label="Expiration Date"
+          value={new Date(expireAt).toLocaleString()}
+        />
+        <Field label="Your Email" value={user.email} />
+        <Field label="Request Date" value={new Date().toLocaleString()} />
+      </div>
+
+      <div>
+        <label className="font-medium text-gray-700 block mb-1">
+          Additional Notes
+        </label>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          rows={3}
+          className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-green-500"
+          placeholder="Enter any additional notes..."
+        ></textarea>
+      </div>
+
+      <div className="flex justify-end space-x-3 mt-4">
+        <button
+          onClick={() => setShowModal(false)}
+          className="px-10 border-2 border-green-600 font-semibold rounded-full bg-transparent py-2 text-gray-700 hover:bg-gray-100 hover:text-rose-600 cursor-pointer duration-300"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleRequestFood}
+          className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-full font-semibold cursor-pointer duration-300"
+        >
+          Claim This Food
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+
     </div>
   );
 };
+
+// Reusable Field component
+const Field = ({ label, value }) => (
+  <div>
+    <label className="text-gray-600 font-medium">{label}</label>
+    <input
+      type="text"
+      value={value}
+      readOnly
+      className="w-full mt-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md"
+    />
+  </div>
+);
 
 export default FoodDetails;

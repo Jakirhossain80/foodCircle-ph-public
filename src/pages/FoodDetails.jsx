@@ -42,12 +42,16 @@ const FoodDetails = () => {
       expireAt: food.expireAt,
       requestDate: new Date().toISOString(),
       notes,
+      requesterName: user.displayName,
+      requesterImage: user.photoURL,
     };
 
     try {
-      await axios.patch(`http://localhost:3000/food/${food._id}`, {
-        foodStatus: "requested",
-      });
+      await axios.put(
+        `http://localhost:3000/foods/request/${food._id}`,
+        { foodStatus: "requested" },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
       await axios.post("http://localhost:3000/requests", requestData);
 
@@ -87,14 +91,12 @@ const FoodDetails = () => {
   return (
     <div className="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 font-inter text-gray-800">
       <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden px-6 py-8">
-        {/* Image */}
         <img
           src={foodImage}
           alt={foodName}
           className="w-full h-[500px] object-cover rounded-sm"
         />
 
-        {/* Content */}
         <div className="p-6 space-y-4">
           <h1 className="text-3xl font-semibold font-poppins text-green-600">
             {foodName}
@@ -163,7 +165,6 @@ const FoodDetails = () => {
           </div>
         </div>
 
-        {/* Make a Request Button */}
         {foodStatus === "Available" && user?.email && (
           <div className="flex justify-end mt-6">
             <button
@@ -176,73 +177,62 @@ const FoodDetails = () => {
         )}
       </div>
 
-      
-      
-      
       {/* Modal */}
-     {showModal && (
-  <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-xs flex items-center justify-center">
-    <div className="bg-gray-50 border border-gray-200 rounded-lg px-8 py-10 w-full max-w-2xl space-y-4 inset-shadow-xl relative">
-      <h2 className="text-2xl font-bold font-poppins text-green-600 text-center">
-        Request This Food
-      </h2>
+      {showModal && (
+        <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-xs flex items-center justify-center">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg px-8 py-10 w-full max-w-2xl space-y-4 inset-shadow-xl relative">
+            <h2 className="text-2xl font-bold font-poppins text-green-600 text-center">
+              Request This Food
+            </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-4 text-sm">
-        <Field label="Food Name" value={foodName} />
-        {/* Removed Field for Food ID */}
-        <Field label="Donor Name" value={donorName} />
-        <Field label="Donor Email" value={donorEmail} />
-        <Field label="Pickup Location" value={location} />
-        <Field
-          label="Expiration Date"
-          value={new Date(expireAt).toLocaleString()}
-        />
-        <Field label="Your Email" value={user.email} />
-        <Field label="Request Date" value={new Date().toLocaleString()} />
-      </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 space-y-4 text-sm">
+              <Field label="Food Name" value={foodName} />
+              <Field label="Donor Name" value={donorName} />
+              <Field label="Donor Email" value={donorEmail} />
+              <Field label="Pickup Location" value={location} />
+              <Field
+                label="Expiration Date"
+                value={new Date(expireAt).toLocaleString()}
+              />
+              <Field label="Your Email" value={user.email} />
+              <Field label="Request Date" value={new Date().toLocaleString()} />
+            </div>
 
-      <div>
-        <label className="font-medium text-gray-700 block mb-1">
-          Additional Notes
-        </label>
-        <textarea
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          rows={3}
-          className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-green-500"
-          placeholder="Enter any additional notes..."
-        ></textarea>
-      </div>
+            <div>
+              <label className="font-medium text-gray-700 block mb-1">
+                Additional Notes
+              </label>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                rows={3}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-green-500"
+                placeholder="Enter any additional notes..."
+              ></textarea>
+            </div>
 
-      <div className="flex justify-end space-x-3 mt-4">
-        <button
-          onClick={() => setShowModal(false)}
-          className="px-10 border-2 border-green-600 font-semibold rounded-full bg-transparent py-2 text-gray-700 hover:bg-gray-100 hover:text-rose-600 cursor-pointer duration-300"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleRequestFood}
-          className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-full font-semibold cursor-pointer duration-300"
-        >
-          Claim This Food
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
-
-
-
-
-
+            <div className="flex justify-end space-x-3 mt-4">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-10 border-2 border-green-600 font-semibold rounded-full bg-transparent py-2 text-gray-700 hover:bg-gray-100 hover:text-rose-600 cursor-pointer duration-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleRequestFood}
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-full font-semibold cursor-pointer duration-300"
+              >
+                Claim This Food
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-// Reusable Field component
+// Reusable Field Component
 const Field = ({ label, value }) => (
   <div>
     <label className="text-gray-600 font-medium">{label}</label>

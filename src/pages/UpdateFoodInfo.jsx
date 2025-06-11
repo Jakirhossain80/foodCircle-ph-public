@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import Loading from "../utils/Loading";
+import { AuthContext } from "../provider/AuthProvider";
 
 const UpdateFoodInfo = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
@@ -12,28 +14,56 @@ const UpdateFoodInfo = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/foods/${id}`)
-      .then((res) => setFormData(res.data))
+      .get(`http://localhost:3000/food/${id}`)
+      .then((res) => {
+        const foodData = res.data;
+        setFormData({
+          ...foodData,
+          userName: foodData.userName || user?.displayName || "",
+          userEmail: foodData.userEmail || user?.email || "",
+        });
+      })
       .catch((err) => {
         console.error(err);
         Swal.fire("Error", "Failed to load food info.", "error");
       })
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, user]);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .put(`http://localhost:3000/foods/${id}`, formData)
-      .then(() => {
-        Swal.fire("Updated!", "Food info saved.", "success");
-        navigate("/managemyfoods");
-      })
-      .catch(() => Swal.fire("Error", "Update failed.", "error"));
+  
+  
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const updatePayload = {
+    ...formData,
+    donorName: formData.userName,
+    donorEmail: formData.userEmail,
   };
+
+  // Clean up fields that should not be sent in the update
+  delete updatePayload._id;
+  delete updatePayload.userName;
+  delete updatePayload.userEmail;
+
+  axios
+    .put(`http://localhost:3000/food/${id}`, updatePayload)
+    .then(() => {
+      Swal.fire("Updated!", "Food info saved.", "success");
+      navigate("/managemyfoods");
+    })
+    .catch((err) => {
+      console.error("Update error:", err);
+      Swal.fire("Error", "Update failed.", "error");
+    });
+};
+
+
+
+
 
   if (loading || !formData) return <Loading />;
 
@@ -95,9 +125,7 @@ const UpdateFoodInfo = () => {
             <input
               type="datetime-local"
               name="expireAt"
-              value={new Date(formData.expireAt)
-                .toISOString()
-                .slice(0, 16)}
+              value={new Date(formData.expireAt).toISOString().slice(0, 16)}
               onChange={handleChange}
               required
               className="w-full border p-3 rounded-md"
@@ -156,7 +184,7 @@ const UpdateFoodInfo = () => {
           <div className="sm:col-span-2 text-center mt-4">
             <button
               type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition"
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition duration-300 cursor-pointer"
             >
               Update Food
             </button>

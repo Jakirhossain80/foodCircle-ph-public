@@ -43,13 +43,13 @@ const ManageMyFoods = () => {
       text: "This will be deleted permanently!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#00c853 ",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete!",
     }).then((res) => {
       if (res.isConfirmed) {
         axios
-          .delete(`http://localhost:3000/foods/${id}`)
+          .delete(`http://localhost:3000/food/${id}`)
           .then(() => {
             setFoods((f) => f.filter((e) => e._id !== id));
             Swal.fire("Deleted!", "Food removed.", "success");
@@ -97,18 +97,18 @@ const ManageMyFoods = () => {
                 <td className="py-2 px-4">
                   {new Date(food.expireAt).toLocaleString()}
                 </td>
-                <td className="py-2 px-4 space-x-2">
+                <td className="py-2 px-4 space-x-6">
                   <button
                     onClick={() => navigate(`/updatefood/${food._id}`)}
-                    className="text-amber-500 hover:text-amber-600"
+                    className="text-amber-500 hover:text-amber-700 cursor-pointer duration-300 p-2"
                   >
-                    <FaEdit size={18} />
+                    <FaEdit size={22} />
                   </button>
                   <button
                     onClick={() => handleDelete(food._id)}
-                    className="text-rose-500 hover:text-rose-600"
+                    className="text-rose-500 hover:text-rose-700 cursor-pointer duration-300 p-2"
                   >
-                    <FaTrash size={18} />
+                    <FaTrash size={22} />
                   </button>
                 </td>
               </tr>

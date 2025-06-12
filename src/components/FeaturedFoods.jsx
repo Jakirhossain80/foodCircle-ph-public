@@ -1,46 +1,36 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Loading from "../utils/Loading";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const FeaturedFoods = () => {
-  const [foods, setFoods] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // For parallax
+  // Parallax setup
   const { scrollYProgress } = useScroll();
   const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
-  useEffect(() => {
-    axios
-      .get("https://foodcircle-live.vercel.app/featured-foods")
-      .then((res) => {
-        setFoods(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching featured foods:", err);
-        setLoading(false);
-      });
-  }, []);
+  // Fetching with React Query
+  const { data: foods = [], isLoading, isError } = useQuery({
+    queryKey: ["featuredFoods"],
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:3000/featured-foods");
+      return res.data;
+    },
+  });
 
-  if (loading) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (isError) return <p className="text-center text-rose-500">Failed to load featured foods.</p>;
 
   return (
     <motion.section
       className="px-4 py-8 mx-auto"
-      style={{ y: parallaxY }} // Parallax background scroll effect
+      style={{ y: parallaxY }}
     >
       <motion.h2
         className="text-2xl md:text-3xl font-semibold font-poppins mb-6 text-center text-gray-800"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          type: "spring",
-          stiffness: 60,
-          damping: 10,
-        }}
+        transition={{ type: "spring", stiffness: 60, damping: 10 }}
         viewport={{ once: true }}
       >
         Featured Foods
@@ -53,11 +43,7 @@ const FeaturedFoods = () => {
             className="bg-white rounded-2xl shadow p-8 flex flex-col"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 80,
-              damping: 12,
-            }}
+            transition={{ type: "spring", stiffness: 80, damping: 12 }}
             viewport={{ once: true, amount: 0.3 }}
             whileHover={{
               scale: 1.03,
@@ -83,15 +69,9 @@ const FeaturedFoods = () => {
         className="text-center mt-8"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          type: "spring",
-          stiffness: 70,
-          damping: 12,
-        }}
+        transition={{ type: "spring", stiffness: 70, damping: 12 }}
         viewport={{ once: true }}
-        whileHover={{
-          scale: 1.05,
-        }}
+        whileHover={{ scale: 1.05 }}
       >
         <Link
           to="/availablefoods"

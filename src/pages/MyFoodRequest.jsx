@@ -11,7 +11,7 @@ const MyFoodRequest = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axios.get(`https://foodcircle-live.vercel.app/requests?email=${user.email}`);
+        const res = await axios.get(`http://localhost:3000/requests?email=${user.email}`);
         setRequests(res.data);
       } catch (err) {
         console.error("Error fetching requests", err);

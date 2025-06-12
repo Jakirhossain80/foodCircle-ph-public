@@ -47,7 +47,7 @@ const AddFood = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://foodcircle-live.vercel.app/foods", formData);
+      const response = await axios.post("http://localhost:3000/foods", formData);
 
       if (response.data.insertedId) {
         Swal.fire({

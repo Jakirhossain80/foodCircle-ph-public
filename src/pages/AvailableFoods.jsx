@@ -17,7 +17,7 @@ const AvailableFoods = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:3000/available-foods`,
+        `https://foodcircle-server.vercel.app/available-foods`,
         {
           params: { search: searchQuery, sort: sortOrder },
         }

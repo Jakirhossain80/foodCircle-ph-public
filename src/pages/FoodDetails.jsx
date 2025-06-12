@@ -182,7 +182,7 @@ const FoodDetails = () => {
       
       
      {showModal && (
-  <div className="fixed inset-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center px-4">
+  <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-sm flex items-center justify-center px-4">
     <div className="bg-gray-50 border border-gray-200 rounded-lg w-full max-w-2xl relative shadow-xl max-h-[90vh] overflow-y-auto p-6 sm:p-8">
       <h2 className="text-2xl font-bold font-poppins text-green-600 text-center mb-4">
         Request This Food

@@ -14,7 +14,7 @@ const UpdateFoodInfo = () => {
 
   useEffect(() => {
     axios
-      .get(`https://foodcircle-server.vercel.app/food/${id}`)
+      .get(`https://foodcircle-live.vercel.app/food/${id}`)
       .then((res) => {
         const foodData = res.data;
         setFormData({
@@ -50,7 +50,7 @@ const handleSubmit = (e) => {
   delete updatePayload.userEmail;
 
   axios
-    .put(`https://foodcircle-server.vercel.app/food/${id}`, updatePayload)
+    .put(`https://foodcircle-live.vercel.app/food/${id}`, updatePayload)
     .then(() => {
       Swal.fire("Updated!", "Food info saved.", "success");
       navigate("/managemyfoods");

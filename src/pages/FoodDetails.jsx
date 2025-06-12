@@ -18,7 +18,7 @@ const FoodDetails = () => {
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const res = await axios.get(`https://foodcircle-server.vercel.app/food/${id}`);
+        const res = await axios.get(`https://foodcircle-live.vercel.app/food/${id}`);
         setFood(res.data);
       } catch (err) {
         console.error("Failed to fetch food details:", err);
@@ -48,12 +48,12 @@ const FoodDetails = () => {
 
     try {
       await axios.put(
-        `https://foodcircle-server.vercel.app/foods/request/${food._id}`,
+        `https://foodcircle-live.vercel.app/foods/request/${food._id}`,
         { foodStatus: "requested" },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      await axios.post("https://foodcircle-server.vercel.app/requests", requestData);
+      await axios.post("https://foodcircle-live.vercel.app/requests", requestData);
 
       Swal.fire("Success", "Food request submitted!", "success");
       setShowModal(false);

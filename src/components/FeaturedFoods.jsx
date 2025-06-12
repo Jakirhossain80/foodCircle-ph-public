@@ -14,7 +14,7 @@ const FeaturedFoods = () => {
 
   useEffect(() => {
     axios
-      .get("https://foodcircle-server.vercel.app/featured-foods")
+      .get("https://foodcircle-live.vercel.app/featured-foods")
       .then((res) => {
         setFoods(res.data);
         setLoading(false);

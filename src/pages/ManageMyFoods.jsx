@@ -28,7 +28,7 @@ const ManageMyFoods = () => {
   useEffect(() => {
     if (!user) return;
     axios
-      .get(`https://foodcircle-server.vercel.app/myfoods?email=${user.email}`)
+      .get(`https://foodcircle-live.vercel.app/myfoods?email=${user.email}`)
       .then((res) => setFoods(res.data))
       .catch((err) => {
         console.error(err);
@@ -49,7 +49,7 @@ const ManageMyFoods = () => {
     }).then((res) => {
       if (res.isConfirmed) {
         axios
-          .delete(`https://foodcircle-server.vercel.app/food/${id}`)
+          .delete(`https://foodcircle-live.vercel.app/food/${id}`)
           .then(() => {
             setFoods((f) => f.filter((e) => e._id !== id));
             Swal.fire("Deleted!", "Food removed.", "success");

@@ -5,6 +5,7 @@ import app from "../firebase.config";
 import Loading from "../utils/Loading";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axiosSecure from "../api/axiosSecure";  // ✅ Imported axiosSecure
 
 const auth = getAuth(app);
 
@@ -35,6 +36,14 @@ const AddFood = () => {
           userEmail: user.email,
           userImage: user.photoURL,
         }));
+
+        // ✅ JWT secured request using axiosSecure
+        const fetchMyFoods = async () => {
+          const response = await axiosSecure.get(`/myfoods?email=${user.email}`);
+          console.log(response.data);
+        };
+
+        fetchMyFoods();
       }
       setLoading(false);
     });
@@ -56,10 +65,8 @@ const AddFood = () => {
           text: `You successfully shared "${formData.foodName}"!`,
         });
 
-        // Invalidate cached food queries to refetch updated data
         queryClient.invalidateQueries({ queryKey: ['foods'] });
 
-        // Reset form except user info
         setFormData((prev) => ({
           ...prev,
           foodName: "",
@@ -88,7 +95,7 @@ const AddFood = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    mutate(formData); // Call mutation here
+    mutate(formData);
   };
 
   if (loading) return <Loading />;
@@ -100,15 +107,9 @@ const AddFood = () => {
           Share Surplus Food
         </h2>
 
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-        >
-          {/* Food Name */}
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
-              Food Name
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Food Name</label>
             <input
               type="text"
               name="foodName"
@@ -120,11 +121,8 @@ const AddFood = () => {
             />
           </div>
 
-          {/* Food Quantity */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
-              Quantity (Servings)
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Quantity (Servings)</label>
             <input
               type="text"
               name="quantity"
@@ -136,11 +134,8 @@ const AddFood = () => {
             />
           </div>
 
-          {/* Pickup Location */}
           <div className="sm:col-span-2">
-            <label className="block mb-2 font-semibold text-gray-700">
-              Pickup Location
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Pickup Location</label>
             <input
               type="text"
               name="location"
@@ -152,11 +147,8 @@ const AddFood = () => {
             />
           </div>
 
-          {/* Expire Date and Time */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
-              Expiration Date & Time
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Expiration Date & Time</label>
             <input
               type="datetime-local"
               name="expireAt"
@@ -167,11 +159,8 @@ const AddFood = () => {
             />
           </div>
 
-          {/* Image URL */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
-              Food Image URL
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Food Image URL</label>
             <input
               type="text"
               name="foodImage"
@@ -182,11 +171,8 @@ const AddFood = () => {
             />
           </div>
 
-          {/* Additional Note */}
           <div className="sm:col-span-2">
-            <label className="block mb-2 font-semibold text-gray-700">
-              Additional Note
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Additional Note</label>
             <textarea
               name="note"
               value={formData.note}
@@ -197,11 +183,8 @@ const AddFood = () => {
             ></textarea>
           </div>
 
-          {/* Firebase User Info */}
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
-              Your Name
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Your Name</label>
             <input
               type="text"
               value={formData.userName}
@@ -211,9 +194,7 @@ const AddFood = () => {
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">
-              Your Email
-            </label>
+            <label className="block mb-2 font-semibold text-gray-700">Your Email</label>
             <input
               type="email"
               value={formData.userEmail}
@@ -222,7 +203,6 @@ const AddFood = () => {
             />
           </div>
 
-          {/* Submit Button */}
           <div className="sm:col-span-2 text-center mt-4">
             <button
               type="submit"

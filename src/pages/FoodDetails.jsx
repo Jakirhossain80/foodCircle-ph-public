@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosSecure from "../api/axiosSecure"; // JWT secured axios instance
 import Swal from "sweetalert2";
 import Loading from "../utils/Loading";
 import { FaMapMarkerAlt, FaClock, FaUserAlt, FaEnvelope } from "react-icons/fa";
@@ -18,7 +18,7 @@ const FoodDetails = () => {
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/food/${id}`);
+        const res = await axiosSecure.get(`/food/${id}`);
         setFood(res.data);
       } catch (err) {
         console.error("Failed to fetch food details:", err);
@@ -47,13 +47,13 @@ const FoodDetails = () => {
     };
 
     try {
-      await axios.put(
-        `http://localhost:3000/foods/request/${food._id}`,
+      await axiosSecure.put(
+        `/foods/request/${food._id}`,
         { foodStatus: "requested" },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      await axios.post("http://localhost:3000/requests", requestData);
+      await axiosSecure.post("/requests", requestData);
 
       Swal.fire("Success", "Food request submitted!", "success");
       setShowModal(false);
@@ -103,8 +103,7 @@ const FoodDetails = () => {
           </h1>
 
           <p>
-            <span className="font-semibold text-gray-700">Quantity:</span>{" "}
-            {quantity}
+            <span className="font-semibold text-gray-700">Quantity:</span> {quantity}
           </p>
 
           <p className="flex items-center gap-2">
@@ -141,7 +140,6 @@ const FoodDetails = () => {
             {new Date(createdAt).toLocaleString()}
           </p>
 
-          {/* Donor Info */}
           <div className="flex items-center gap-4 mt-6">
             {donorImage ? (
               <img
@@ -177,66 +175,53 @@ const FoodDetails = () => {
         )}
       </div>
 
-      
-      
-      
-      
-     {showModal && (
-  <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-sm flex items-center justify-center px-4">
-    <div className="bg-gray-50 border border-gray-200 rounded-lg w-full max-w-2xl relative shadow-xl max-h-[90vh] overflow-y-auto p-6 sm:p-8">
-      <h2 className="text-2xl font-bold font-poppins text-green-600 text-center mb-4">
-        Request This Food
-      </h2>
+      {showModal && (
+        <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-sm flex items-center justify-center px-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg w-full max-w-2xl relative shadow-xl max-h-[90vh] overflow-y-auto p-6 sm:p-8">
+            <h2 className="text-2xl font-bold font-poppins text-green-600 text-center mb-4">
+              Request This Food
+            </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <Field label="Food Name" value={foodName} />
-        <Field label="Donor Name" value={donorName} />
-        <Field label="Donor Email" value={donorEmail} />
-        <Field label="Pickup Location" value={location} />
-        <Field label="Expiration Date" value={new Date(expireAt).toLocaleString()} />
-        <Field label="Your Email" value={user.email} />
-        <Field label="Request Date" value={new Date().toLocaleString()} />
-      </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <Field label="Food Name" value={foodName} />
+              <Field label="Donor Name" value={donorName} />
+              <Field label="Donor Email" value={donorEmail} />
+              <Field label="Pickup Location" value={location} />
+              <Field label="Expiration Date" value={new Date(expireAt).toLocaleString()} />
+              <Field label="Your Email" value={user.email} />
+              <Field label="Request Date" value={new Date().toLocaleString()} />
+            </div>
 
-      <div className="mt-4">
-        <label className="font-medium text-gray-700 block mb-1">
-          Additional Notes
-        </label>
-        <textarea
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          rows={3}
-          className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-green-500"
-          placeholder="Enter any additional notes..."
-        ></textarea>
-      </div>
+            <div className="mt-4">
+              <label className="font-medium text-gray-700 block mb-1">
+                Additional Notes
+              </label>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                rows={3}
+                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-green-500"
+                placeholder="Enter any additional notes..."
+              ></textarea>
+            </div>
 
-      <div className="flex justify-end space-x-3 mt-6">
-        <button
-          onClick={() => setShowModal(false)}
-          className="px-10 border-2 border-green-600 font-semibold rounded-full bg-transparent py-2 text-gray-700 hover:bg-gray-100 hover:text-rose-600 cursor-pointer duration-300"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleRequestFood}
-          className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-full font-semibold cursor-pointer duration-300"
-        >
-          Claim This Food
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-
-
-
-
-
-
-
-
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                onClick={() => setShowModal(false)}
+                className="px-10 border-2 border-green-600 font-semibold rounded-full bg-transparent py-2 text-gray-700 hover:bg-gray-100 hover:text-rose-600 cursor-pointer duration-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleRequestFood}
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-full font-semibold cursor-pointer duration-300"
+              >
+                Claim This Food
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../firebase.config";
-import axios from "axios";
+import axiosSecure from "../api/axiosSecure"; // JWT secured axios instance
 import Loading from "../utils/Loading";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
@@ -24,17 +24,23 @@ const ManageMyFoods = () => {
     return unsubscribe;
   }, [navigate]);
 
-  // Fetch user-specific foods
+  // Fetch user-specific foods using JWT-secured axios
   useEffect(() => {
     if (!user) return;
-    axios
-      .get(`http://localhost:3000/myfoods?email=${user.email}`)
-      .then((res) => setFoods(res.data))
-      .catch((err) => {
+
+    const fetchMyFoods = async () => {
+      try {
+        const response = await axiosSecure.get(`/myfoods?email=${user.email}`);
+        setFoods(response.data);
+      } catch (err) {
         console.error(err);
         Swal.fire("Error", "Unable to fetch your foods.", "error");
-      })
-      .finally(() => setLoading(false));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMyFoods();
   }, [user]);
 
   const handleDelete = (id) => {
@@ -48,8 +54,8 @@ const ManageMyFoods = () => {
       confirmButtonText: "Yes, delete!",
     }).then((res) => {
       if (res.isConfirmed) {
-        axios
-          .delete(`http://localhost:3000/food/${id}`)
+        axiosSecure
+          .delete(`/food/${id}`)
           .then(() => {
             setFoods((f) => f.filter((e) => e._id !== id));
             Swal.fire("Deleted!", "Food removed.", "success");

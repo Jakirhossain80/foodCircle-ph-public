@@ -3,7 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../provider/AuthProvider";
 import { useLocation } from "react-router";
-import { showSuccessAlert, showErrorAlert, showConfirmDialog } from "../utils/SweetAlert";
+import {
+  showSuccessAlert,
+  showErrorAlert,
+  showConfirmDialog,
+} from "../utils/SweetAlert";
 
 const Login = () => {
   const { signIn, googleLogin } = useContext(AuthContext);
@@ -29,7 +33,9 @@ const Login = () => {
       showSuccessAlert("Login successful!");
       navigate(`${location.state ? location.state : "/"}`);
     } catch (err) {
-      showErrorAlert("Login failed. Please check your email and password and try again.");
+      showErrorAlert(
+        "Login failed. Please check your email and password and try again."
+      );
     } finally {
       setLoading(false);
     }

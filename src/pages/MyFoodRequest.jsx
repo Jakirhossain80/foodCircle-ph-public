@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import axiosSecure from "../api/axiosSecure"; // JWT secured axios instance
 import { AuthContext } from "../provider/AuthProvider";
 import Loading from "../utils/Loading";
 
@@ -11,7 +11,7 @@ const MyFoodRequest = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/requests?email=${user.email}`);
+        const res = await axiosSecure.get(`/requests?email=${user.email}`);
         setRequests(res.data);
       } catch (err) {
         console.error("Error fetching requests", err);

@@ -4,6 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../firebase.config";
 import Loading from "../utils/Loading";
 import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const auth = getAuth(app);
 
@@ -19,7 +20,10 @@ const AddFood = () => {
     note: "",
     userName: "",
     userEmail: "",
+    userImage: "",
   });
+
+  const queryClient = useQueryClient();
 
   // Set user info from Firebase auth
   useEffect(() => {
@@ -29,7 +33,7 @@ const AddFood = () => {
           ...prev,
           userName: user.displayName || "Anonymous",
           userEmail: user.email,
-           userImage: user.photoURL,
+          userImage: user.photoURL,
         }));
       }
       setLoading(false);
@@ -38,23 +42,22 @@ const AddFood = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post("http://localhost:3000/foods", formData);
-
-      if (response.data.insertedId) {
+  // Mutation with React Query
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (newFood) => {
+      const res = await axios.post("http://localhost:3000/foods", newFood);
+      return res.data;
+    },
+    onSuccess: (data) => {
+      if (data.insertedId) {
         Swal.fire({
           icon: "success",
           title: "Food Added",
           text: `You successfully shared "${formData.foodName}"!`,
         });
+
+        // Invalidate cached food queries to refetch updated data
+        queryClient.invalidateQueries({ queryKey: ['foods'] });
 
         // Reset form except user info
         setFormData((prev) => ({
@@ -67,9 +70,25 @@ const AddFood = () => {
           note: "",
         }));
       }
-    } catch (error) {
+    },
+    onError: (error) => {
       console.error("Error adding food:", error);
-    }
+      Swal.fire({
+        icon: "error",
+        title: "Failed to Add Food",
+        text: error.message || "Something went wrong",
+      });
+    },
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutate(formData); // Call mutation here
   };
 
   if (loading) return <Loading />;
@@ -207,9 +226,10 @@ const AddFood = () => {
           <div className="sm:col-span-2 text-center mt-4">
             <button
               type="submit"
+              disabled={isPending}
               className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded transition duration-300 cursor-pointer"
             >
-              Add Food
+              {isPending ? "Adding..." : "Add Food"}
             </button>
           </div>
         </form>

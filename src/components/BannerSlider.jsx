@@ -36,7 +36,7 @@ const BannerSlider = () => {
 
   return (
     <div
-      className="w-full h-[300px] md:h-[700px] relative"
+      className="w-full h-[300px] md:h-[700px] relative transition-all duration-500"
       onMouseEnter={() => swiperRef.current?.autoplay?.stop()}
       onMouseLeave={() => swiperRef.current?.autoplay?.start()}
     >
@@ -61,22 +61,22 @@ const BannerSlider = () => {
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full transition-all duration-500">
               <img
                 src={slide.image}
                 alt={`Slide ${index + 1}`}
-                className="w-full h-full object-cover rounded-md"
+                className="w-full h-full object-cover rounded-md transition-all duration-500"
               />
-              <div className="absolute inset-0 bg-black/40 flex flex-col items-start justify-center p-6 md:p-16 text-white rounded-md">
-                <h2 className="text-2xl md:text-5xl font-bold font-poppins mb-3 text-amber-400">
+              <div className="absolute inset-0 bg-black/40 flex flex-col items-start justify-center p-6 md:p-16 rounded-md transition-all duration-500">
+                <h2 className="text-2xl md:text-5xl font-bold font-poppins mb-3 text-amber-400 transition-all duration-500">
                   {slide.heading}
                 </h2>
-                <p className="text-sm md:text-lg font-inter mb-4 max-w-lg">
+                <p className="text-sm md:text-lg font-inter mb-4 max-w-lg text-white dark:text-gray-200 transition-all duration-500">
                   {slide.text}
                 </p>
                 <a
                   href={slide.buttonLink}
-                  className="bg-green-600 hover:bg-green-700 transition px-5 py-2 rounded text-white font-medium"
+                  className="bg-green-600 hover:bg-green-700 transition-all duration-500 px-5 py-2 rounded text-white font-medium"
                 >
                   {slide.button}
                 </a>
@@ -86,11 +86,11 @@ const BannerSlider = () => {
         ))}
 
         {/* Navigation buttons */}
-        <div className="swiper-button-prev !text-white" />
-        <div className="swiper-button-next !text-white" />
+        <div className="swiper-button-prev !text-white transition-all duration-500" />
+        <div className="swiper-button-next !text-white transition-all duration-500" />
 
         {/* Pagination bullets */}
-        <div className="swiper-pagination !bottom-4" />
+        <div className="swiper-pagination !bottom-4 transition-all duration-500" />
       </Swiper>
     </div>
   );

@@ -10,9 +10,9 @@ import logoImage from "../assets/logo-food.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-50 text-gray-800 border-t border-gray-200 mt-10">
+    <footer className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-t border-gray-200 dark:border-gray-700 mt-10 transition-all duration-500">
       <motion.div
-        className="max-w-7xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3"
+        className="max-w-7xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3 transition-all duration-500"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -26,7 +26,7 @@ const Footer = () => {
               FoodCircle
             </h2>
           </Link>
-          <p className="text-sm font-inter">
+          <p className="text-sm font-inter transition-all duration-500">
             Empowering communities through food sharing. Reduce waste, spread
             love, and nourish sustainability.
           </p>
@@ -40,7 +40,7 @@ const Footer = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `hover:text-green-600 transition-all ${
+              `hover:text-green-600 transition-all duration-500 ${
                 isActive ? "text-green-600 font-medium" : ""
               }`
             }
@@ -50,7 +50,7 @@ const Footer = () => {
           <NavLink
             to="/availablefoods"
             className={({ isActive }) =>
-              `hover:text-green-600 transition-all ${
+              `hover:text-green-600 transition-all duration-500 ${
                 isActive ? "text-green-600 font-medium" : ""
               }`
             }
@@ -60,7 +60,7 @@ const Footer = () => {
           <NavLink
             to="/addfood"
             className={({ isActive }) =>
-              `hover:text-green-600 transition-all ${
+              `hover:text-green-600 transition-all duration-500 ${
                 isActive ? "text-green-600 font-medium" : ""
               }`
             }
@@ -70,7 +70,7 @@ const Footer = () => {
           <NavLink
             to="/managemyfoods"
             className={({ isActive }) =>
-              `hover:text-green-600 transition-all ${
+              `hover:text-green-600 transition-all duration-500 ${
                 isActive ? "text-green-600 font-medium" : ""
               }`
             }
@@ -80,7 +80,7 @@ const Footer = () => {
           <NavLink
             to="/myfoodrequest"
             className={({ isActive }) =>
-              `hover:text-green-600 transition-all ${
+              `hover:text-green-600 transition-all duration-500 ${
                 isActive ? "text-green-600 font-medium" : ""
               }`
             }
@@ -102,7 +102,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
+              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-all duration-500 text-white"
             >
               <FaFacebookF />
             </motion.a>
@@ -113,7 +113,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"
-              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
+              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-all duration-500 text-white"
             >
               <FaTwitter />
             </motion.a>
@@ -124,7 +124,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
+              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-all duration-500 text-white"
             >
               <FaInstagram />
             </motion.a>
@@ -135,7 +135,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors text-white"
+              className="p-2 rounded-full bg-amber-400 hover:bg-amber-500 transition-all duration-500 text-white"
             >
               <FaLinkedinIn />
             </motion.a>
@@ -144,7 +144,7 @@ const Footer = () => {
       </motion.div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-200 text-center py-4 text-sm text-gray-600 font-inter">
+      <div className="border-t border-gray-200 dark:border-gray-700 text-center py-4 text-sm text-gray-600 dark:text-gray-400 font-inter transition-all duration-500">
         © FoodCircle 2025. All rights reserved.
       </div>
     </footer>

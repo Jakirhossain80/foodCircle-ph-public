@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import { ThemeContext } from "../provider/ThemeProvider";
 import { signOut, getAuth } from "firebase/auth";
 import app from "../firebase.config";
 import { FiSun, FiMoon } from "react-icons/fi";
@@ -11,6 +12,7 @@ const auth = getAuth(app);
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const navigate = useNavigate();
@@ -30,9 +32,9 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+          `hover:text-green-600 transition-all duration-500 ${
+            isActive ? "text-green-600 font-medium" : ""
+          }`
         }
       >
         Home
@@ -40,9 +42,9 @@ const Navbar = () => {
       <NavLink
         to="/availablefoods"
         className={({ isActive }) =>
-          `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+          `hover:text-green-600 transition-all duration-500 ${
+            isActive ? "text-green-600 font-medium" : ""
+          }`
         }
       >
         Available Foods
@@ -50,9 +52,9 @@ const Navbar = () => {
       <NavLink
         to="/addfood"
         className={({ isActive }) =>
-          `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+          `hover:text-green-600 transition-all duration-500 ${
+            isActive ? "text-green-600 font-medium" : ""
+          }`
         }
       >
         Add Food
@@ -60,9 +62,9 @@ const Navbar = () => {
       <NavLink
         to="/managemyfoods"
         className={({ isActive }) =>
-          `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+          `hover:text-green-600 transition-all duration-500 ${
+            isActive ? "text-green-600 font-medium" : ""
+          }`
         }
       >
         Manage My Foods
@@ -70,9 +72,9 @@ const Navbar = () => {
       <NavLink
         to="/myfoodrequest"
         className={({ isActive }) =>
-          `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+          `hover:text-green-600 transition-all duration-500 ${
+            isActive ? "text-green-600 font-medium" : ""
+          }`
         }
       >
         My Food Request
@@ -81,34 +83,26 @@ const Navbar = () => {
   );
 
   return (
-  <nav className="fixed top-0 left-0 right-0 w-full container bg-white border-gray-200 px-4 py-10 flex justify-between items-center z-50">
-
-
-
+    <nav className="fixed top-0 left-0 right-0 w-full container bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 px-4 py-10 flex justify-between items-center z-50 transition-all duration-500">
       {/* Logo and Title */}
       <Link to="/" className="flex items-center gap-2">
         <img src={logoImage} alt="Logo" className="h-8 w-8" />
-        <h1 className="text-xl font-bold text-green-600 font-poppins">
-          FoodCircle
-        </h1>
+        <h1 className="text-xl font-bold text-green-600 font-poppins">FoodCircle</h1>
       </Link>
 
       {/* Desktop Menu */}
-      <div className="hidden md:flex items-center gap-6 text-gray-800 font-inter">
+      <div className="hidden md:flex items-center gap-6 text-gray-800 dark:text-gray-200 font-inter transition-all duration-500">
         {navLinks}
-        <button className="text-xl cursor-pointer">
-          <FiSun />
+        <button id="toggleDesktop" onClick={toggleTheme} className="text-xl cursor-pointer transition-all duration-500">
+          {theme === "light" ? <FiMoon /> : <FiSun />}
         </button>
 
         {!user && (
           <>
-            <NavLink to="/login" className="text-amber-500 font-semibold">
+            <NavLink to="/login" className="text-amber-500 font-semibold transition-all duration-500">
               Login
             </NavLink>
-            <NavLink
-              to="/registration"
-              className="text-amber-500 font-semibold"
-            >
+            <NavLink to="/registration" className="text-amber-500 font-semibold transition-all duration-500">
               Signup
             </NavLink>
           </>
@@ -123,14 +117,14 @@ const Navbar = () => {
             <img
               src={user.photoURL}
               alt="User"
-              className="h-10 w-10 rounded-full border-2 border-green-500 cursor-pointer"
+              className="h-10 w-10 rounded-full border-2 border-green-500 cursor-pointer transition-all duration-500"
             />
             {user && showDropdown && (
-              <div className="absolute right-0 bg-white border border-gray-200 p-3 shadow-md rounded text-sm w-44">
-                <p className="font-medium text-gray-800">{user.displayName}</p>
+              <div className="absolute right-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-3 shadow-md rounded text-sm w-44 transition-all duration-500">
+                <p className="font-medium text-gray-800 dark:text-gray-200 transition-all duration-500">{user.displayName}</p>
                 <button
                   onClick={handleLogout}
-                  className="mt-2 w-full text-left text-rose-500 hover:text-rose-600 cursor-pointer"
+                  className="mt-2 w-full text-left text-rose-500 hover:text-rose-600 cursor-pointer transition-all duration-500"
                 >
                   Logout
                 </button>
@@ -143,7 +137,7 @@ const Navbar = () => {
       {/* Mobile Menu Icon */}
       <div className="md:hidden flex items-center">
         <button
-          className="text-2xl text-green-600 cursor-pointer"
+          className="text-2xl text-green-600 cursor-pointer transition-all duration-500"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <HiOutlineX /> : <HiOutlineMenuAlt3 />}
@@ -152,15 +146,15 @@ const Navbar = () => {
 
       {/* Mobile Dropdown */}
       {isMobileMenuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white z-40 flex flex-col gap-4 p-5 shadow-md text-gray-800 font-inter md:hidden">
+        <div className="absolute top-16 left-0 w-full bg-white dark:bg-gray-900 z-40 flex flex-col gap-4 p-5 shadow-md text-gray-800 dark:text-gray-200 font-inter md:hidden transition-all duration-500">
           <>
             <NavLink
               to="/"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+                `hover:text-green-600 transition-all duration-500 ${
+                  isActive ? "text-green-600 font-medium" : ""
+                }`
               }
             >
               Home
@@ -169,9 +163,9 @@ const Navbar = () => {
               to="/availablefoods"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+                `hover:text-green-600 transition-all duration-500 ${
+                  isActive ? "text-green-600 font-medium" : ""
+                }`
               }
             >
               Available Foods
@@ -180,9 +174,9 @@ const Navbar = () => {
               to="/addfood"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+                `hover:text-green-600 transition-all duration-500 ${
+                  isActive ? "text-green-600 font-medium" : ""
+                }`
               }
             >
               Add Food
@@ -191,9 +185,9 @@ const Navbar = () => {
               to="/managemyfoods"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+                `hover:text-green-600 transition-all duration-500 ${
+                  isActive ? "text-green-600 font-medium" : ""
+                }`
               }
             >
               Manage My Foods
@@ -202,17 +196,17 @@ const Navbar = () => {
               to="/myfoodrequest"
               onClick={() => setIsMobileMenuOpen(false)}
               className={({ isActive }) =>
-                `hover:text-green-600 transition-all ${
-                isActive ? "text-green-600 font-medium" : ""
-              }`
+                `hover:text-green-600 transition-all duration-500 ${
+                  isActive ? "text-green-600 font-medium" : ""
+                }`
               }
             >
               My Food Request
             </NavLink>
           </>
 
-          <button className="text-xl w-fit cursor-pointer">
-            <FiSun />
+          <button id="toggleMobile" onClick={toggleTheme} className="text-xl w-fit cursor-pointer transition-all duration-500">
+            {theme === "light" ? <FiMoon /> : <FiSun />}
           </button>
 
           {!user && (
@@ -220,14 +214,14 @@ const Navbar = () => {
               <NavLink
                 to="/login"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-amber-500 font-semibold"
+                className="text-amber-500 font-semibold transition-all duration-500"
               >
                 Login
               </NavLink>
               <NavLink
                 to="/registration"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-amber-500 font-semibold"
+                className="text-amber-500 font-semibold transition-all duration-500"
               >
                 Signup
               </NavLink>
@@ -239,13 +233,13 @@ const Navbar = () => {
               <img
                 src={user.photoURL}
                 alt="User"
-                className="h-10 w-10 rounded-full border-2 border-green-500"
+                className="h-10 w-10 rounded-full border-2 border-green-500 transition-all duration-500"
               />
               <div>
-                <p className="font-medium">{user.displayName}</p>
+                <p className="font-medium transition-all duration-500">{user.displayName}</p>
                 <button
                   onClick={handleLogout}
-                  className="text-rose-500 hover:text-rose-600 text-sm cursor-pointer"
+                  className="text-rose-500 hover:text-rose-600 text-sm cursor-pointer transition-all duration-500"
                 >
                   Logout
                 </button>

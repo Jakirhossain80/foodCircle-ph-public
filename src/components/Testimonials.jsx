@@ -4,6 +4,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { AiFillStar } from 'react-icons/ai';
 import { motion } from 'framer-motion';
+import { useContext } from 'react';
+import { ThemeContext } from '../provider/ThemeProvider';
 
 const testimonials = [
   {
@@ -51,10 +53,18 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  const { theme } = useContext(ThemeContext); // consume theme
+
   return (
-    <section className="py-12 bg-gradient-to-r from-lime-100 via-amber-100 to-emerald-100 text-gray-800">
+    <section
+      className={`py-12 transition-all duration-500 ${
+        theme === 'light'
+          ? 'bg-gradient-to-r from-lime-100 via-amber-100 to-emerald-100 text-gray-800'
+          : 'bg-gradient-to-r from-lime-800 via-amber-900 to-emerald-900 text-gray-100'
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-8 transition-all duration-500">
           What Our Users Say
         </h2>
 
@@ -76,10 +86,12 @@ const Testimonials = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-sm p-6 flex flex-col items-center h-full justify-between"
+                className={`rounded-xl p-6 shadow-sm flex flex-col items-center h-full justify-between transition-all duration-500 ${
+                  theme === 'light' ? 'bg-white text-gray-700' : 'bg-gray-800 text-gray-200'
+                }`}
               >
                 <div className="relative mb-4 w-full">
-                  <p className="text-sm italic text-gray-700 before:content-['“'] after:content-['”']">
+                  <p className="text-sm italic before:content-['“'] after:content-['”'] transition-all duration-500">
                     {testimonial.quote}
                   </p>
                 </div>
@@ -87,9 +99,9 @@ const Testimonials = () => {
                   <img
                     src={testimonial.photoURL}
                     alt={testimonial.name}
-                    className="w-14 h-14 rounded-full mb-2"
+                    className="w-14 h-14 rounded-full mb-2 transition-all duration-500"
                   />
-                  <p className="text-base font-semibold">{testimonial.name}</p>
+                  <p className="text-base font-semibold transition-all duration-500">{testimonial.name}</p>
                   <div className="flex mt-1 text-amber-500 text-xl">
                     {Array.from({ length: testimonial.rating }).map((_, i) => (
                       <AiFillStar key={i} />

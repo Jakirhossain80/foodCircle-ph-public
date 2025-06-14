@@ -16,12 +16,9 @@ const AvailableFoods = () => {
   const fetchFoods = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `http://localhost:3000/available-foods`,
-        {
-          params: { search: searchQuery, sort: sortOrder },
-        }
-      );
+      const response = await axios.get(`http://localhost:3000/available-foods`, {
+        params: { search: searchQuery, sort: sortOrder },
+      });
       setFoods(response.data);
     } catch (err) {
       console.error("Failed to fetch foods:", err);
@@ -65,26 +62,25 @@ const AvailableFoods = () => {
   }, [searchInput]);
 
   return (
-    <div className="mx-auto px-4 py-8 font-inter text-gray-800">
+    <div className="mx-auto px-4 py-8 font-inter text-gray-800 dark:text-white transition-all duration-500">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         {/* Search */}
         <div className="flex items-center gap-2 w-full md:w-auto">
           <input
             type="text"
             placeholder="Search food name..."
-            className="input input-bordered w-full md:w-64 border-green-500 focus:outline  focus:outline-green-600"
+            className="input input-bordered w-full md:w-64 border-green-500 focus:outline focus:outline-green-600 dark:bg-gray-800 dark:border-green-400 dark:placeholder-gray-400 transition-all duration-500"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyPress}
           />
-
           <button
             onClick={handleSearchClick}
-            className="btn border-green-400 text-green-500 hover:bg-green-400 hover:text-white flex items-center group"
+            className="btn border-green-400 text-green-600 hover:bg-green-400 hover:text-white flex items-center group dark:border-green-300 dark:text-green-600 dark:hover:bg-green-500 transition-all duration-500"
             title="Search"
             disabled={isTyping}
           >
-            <FaSearch className="text-green-500 group-hover:text-white transition-colors duration-200" />{" "}
+            <FaSearch className="text-green-600 group-hover:text-white dark:text-green-600 dark:group-hover:text-white transition-all duration-500" />{" "}
             Search
           </button>
         </div>
@@ -92,7 +88,7 @@ const AvailableFoods = () => {
         {/* Sort */}
         <div>
           <select
-            className="select select-bordered border-green-500 focus:border-green-600 focus:ring-green-500"
+            className="select select-bordered border-green-500 focus:border-green-600 focus:ring-green-500 dark:bg-gray-800 dark:border-green-400 transition-all duration-500"
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
           >
@@ -104,7 +100,7 @@ const AvailableFoods = () => {
 
         {/* Toggle Layout */}
         <button
-          className="btn border-green-400 text-green-500 hover:bg-green-400 hover:text-white flex items-center gap-2"
+          className="btn border-green-400 text-green-600 hover:bg-green-400 hover:text-white flex items-center gap-2 dark:border-green-300 dark:text-green-600 dark:hover:bg-green-500 transition-all duration-500"
           onClick={() => setIsGridThree(!isGridThree)}
         >
           {isGridThree ? <FaThList /> : <FaTh />}
@@ -124,14 +120,14 @@ const AvailableFoods = () => {
           }`}
         >
           {foods.length === 0 ? (
-            <p className="col-span-full text-2xl font-semibold text-center text-amber-500">
+            <p className="col-span-full text-2xl font-semibold text-center text-amber-500 dark:text-amber-400 transition-all duration-500">
               No food items found.
             </p>
           ) : (
             foods.map((food) => (
               <div
                 key={food._id}
-                className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 flex flex-col px-4 py-6"
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-600 flex flex-col px-4 py-6 transition-all duration-500"
               >
                 <img
                   src={food.foodImage}
@@ -153,7 +149,7 @@ const AvailableFoods = () => {
                   <div className="mt-auto">
                     <Link
                       to={`/food/${food._id}`}
-                      className="btn bg-green-500 hover:bg-green-600 text-white mt-4 w-full"
+                      className="btn bg-green-500 hover:bg-green-600 text-white mt-4 w-full dark:bg-green-600 dark:hover:bg-green-700 transition-all duration-500"
                     >
                       View Details
                     </Link>

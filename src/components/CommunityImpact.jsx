@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaUtensils, FaGlobeAmericas, FaHandsHelping } from "react-icons/fa";
+import { ThemeContext } from "../provider/ThemeProvider";
 
 const CommunityImpact = () => {
+  const { theme } = useContext(ThemeContext); // get current theme
+
   const stats = [
     { icon: <FaUtensils />, label: "Meals Shared", count: 12000 },
     { icon: <FaGlobeAmericas />, label: "Food Saved (kg)", count: 5500 },
@@ -32,9 +35,15 @@ const CommunityImpact = () => {
   };
 
   return (
-    <section className="bg-gradient-to-r from-amber-400 to-amber-300 py-12 text-gray-800">
+    <section
+      className={`py-12 transition-all duration-500 ${
+        theme === "light"
+          ? "bg-gradient-to-r from-amber-400 to-amber-300 text-gray-800"
+          : "bg-gradient-to-r from-amber-500 to-amber-600 text-gray-100"
+      }`}
+    >
       <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-10">
+        <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-10 transition-all duration-500">
           Together, We're Making a Real Difference
         </h2>
 
@@ -42,17 +51,21 @@ const CommunityImpact = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg flex flex-col items-center justify-center"
+              className={`rounded-2xl p-8 shadow-lg flex flex-col items-center justify-center transition-all duration-500 ${
+                theme === "light"
+                  ? "bg-white text-gray-700"
+                  : "bg-gray-800 text-gray-100"
+              }`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="text-4xl mb-4 text-green-600">{stat.icon}</div>
-              <div className="text-3xl font-bold text-green-600 mb-2">
+              <div className="text-4xl mb-4 text-green-600 transition-all duration-500">{stat.icon}</div>
+              <div className="text-3xl font-bold text-green-600 mb-2 transition-all duration-500">
                 <AnimatedCounter value={stat.count} />
               </div>
-              <p className="text-base text-gray-700 font-medium">
+              <p className="text-base font-medium transition-all duration-500">
                 {stat.label}
               </p>
             </motion.div>

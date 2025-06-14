@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosSecure from "../api/axiosSecure"; // JWT secured axios instance
+import axiosSecure from "../api/axiosSecure";
 import Swal from "sweetalert2";
 import Loading from "../utils/Loading";
 import { FaMapMarkerAlt, FaClock, FaUserAlt, FaEnvelope } from "react-icons/fa";
@@ -26,7 +26,6 @@ const FoodDetails = () => {
         setLoading(false);
       }
     };
-
     fetchFood();
   }, [id]);
 
@@ -54,7 +53,6 @@ const FoodDetails = () => {
       );
 
       await axiosSecure.post("/requests", requestData);
-
       Swal.fire("Success", "Food request submitted!", "success");
       setShowModal(false);
       navigate("/myfoodrequest");
@@ -68,7 +66,7 @@ const FoodDetails = () => {
 
   if (!food) {
     return (
-      <div className="flex justify-center items-center h-[50vh] text-rose-500 font-semibold text-xl">
+      <div className="flex justify-center items-center h-[50vh] text-rose-500 font-semibold text-xl transition-all duration-500 dark:text-rose-400">
         Food item not found.
       </div>
     );
@@ -89,8 +87,8 @@ const FoodDetails = () => {
   } = food;
 
   return (
-    <div className="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 font-inter text-gray-800">
-      <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden px-6 py-8">
+    <div className="max-w-5xl mx-auto p-4 sm:p-6 lg:p-8 font-inter transition-all duration-500 text-gray-800 dark:text-gray-100">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden px-6 py-8 transition-all duration-500">
         <img
           src={foodImage}
           alt={foodName}
@@ -98,12 +96,12 @@ const FoodDetails = () => {
         />
 
         <div className="p-6 space-y-4">
-          <h1 className="text-3xl font-semibold font-poppins text-green-600">
+          <h1 className="text-3xl font-semibold font-poppins text-green-600 dark:text-green-400 transition-all duration-500">
             {foodName}
           </h1>
 
           <p>
-            <span className="font-semibold text-gray-700">Quantity:</span> {quantity}
+            <span className="font-semibold text-gray-700 dark:text-gray-300 transition-all duration-500">Quantity:</span> {quantity}
           </p>
 
           <p className="flex items-center gap-2">
@@ -117,12 +115,12 @@ const FoodDetails = () => {
           </p>
 
           <p>
-            <span className="font-semibold text-gray-700">Status:</span>{" "}
+            <span className="font-semibold text-gray-700 dark:text-gray-300 transition-all duration-500">Status:</span>{" "}
             <span
-              className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+              className={`inline-block px-3 py-1 rounded-full text-sm font-medium transition-all duration-500 ${
                 foodStatus === "Available"
-                  ? "bg-emerald-100 text-emerald-600"
-                  : "bg-rose-100 text-rose-600"
+                  ? "bg-emerald-100 dark:bg-emerald-600/20 text-emerald-600 dark:text-emerald-400"
+                  : "bg-rose-100 dark:bg-rose-600/20 text-rose-600 dark:text-rose-400"
               }`}
             >
               {foodStatus}
@@ -131,12 +129,12 @@ const FoodDetails = () => {
 
           {note && (
             <p>
-              <span className="font-semibold text-gray-700">Note:</span> {note}
+              <span className="font-semibold text-gray-700 dark:text-gray-300 transition-all duration-500">Note:</span> {note}
             </p>
           )}
 
           <p>
-            <span className="font-semibold text-gray-700">Posted on:</span>{" "}
+            <span className="font-semibold text-gray-700 dark:text-gray-300 transition-all duration-500">Posted on:</span>{" "}
             {new Date(createdAt).toLocaleString()}
           </p>
 
@@ -148,15 +146,15 @@ const FoodDetails = () => {
                 className="w-14 h-14 rounded-full object-cover border border-green-500"
               />
             ) : (
-              <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl font-bold">
+              <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center text-green-600 dark:text-green-400 text-xl font-bold">
                 {donorName?.charAt(0)}
               </div>
             )}
             <div>
-              <p className="flex items-center gap-2 text-lg font-medium text-green-700">
+              <p className="flex items-center gap-2 text-lg font-medium text-green-700 dark:text-green-400 transition-all duration-500">
                 <FaUserAlt /> {donorName}
               </p>
-              <p className="flex items-center gap-2 text-sm text-gray-600">
+              <p className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 transition-all duration-500">
                 <FaEnvelope /> {donorEmail}
               </p>
             </div>
@@ -177,8 +175,8 @@ const FoodDetails = () => {
 
       {showModal && (
         <div className="fixed inset-0 z-50 bg-transparent backdrop-blur-sm flex items-center justify-center px-4">
-          <div className="bg-gray-50 border border-gray-200 rounded-lg w-full max-w-2xl relative shadow-xl max-h-[90vh] overflow-y-auto p-6 sm:p-8">
-            <h2 className="text-2xl font-bold font-poppins text-green-600 text-center mb-4">
+          <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg w-full max-w-2xl relative shadow-xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 transition-all duration-500">
+            <h2 className="text-2xl font-bold font-poppins text-green-600 dark:text-green-400 text-center mb-4 transition-all duration-500">
               Request This Food
             </h2>
 
@@ -193,14 +191,14 @@ const FoodDetails = () => {
             </div>
 
             <div className="mt-4">
-              <label className="font-medium text-gray-700 block mb-1">
+              <label className="font-medium text-gray-700 dark:text-gray-300 block mb-1 transition-all duration-500">
                 Additional Notes
               </label>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={3}
-                className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-green-500"
+                className="w-full border rounded-md px-3 py-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-green-500 transition-all duration-500"
                 placeholder="Enter any additional notes..."
               ></textarea>
             </div>
@@ -208,7 +206,7 @@ const FoodDetails = () => {
             <div className="flex justify-end space-x-3 mt-6">
               <button
                 onClick={() => setShowModal(false)}
-                className="px-10 border-2 border-green-600 font-semibold rounded-full bg-transparent py-2 text-gray-700 hover:bg-gray-100 hover:text-rose-600 cursor-pointer duration-300"
+                className="px-10 border-2 border-green-600 font-semibold rounded-full bg-transparent py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-rose-600 cursor-pointer duration-300"
               >
                 Cancel
               </button>
@@ -229,12 +227,12 @@ const FoodDetails = () => {
 // Reusable Field Component
 const Field = ({ label, value }) => (
   <div>
-    <label className="text-gray-600 font-medium">{label}</label>
+    <label className="text-gray-600 dark:text-gray-300 font-medium transition-all duration-500">{label}</label>
     <input
       type="text"
       value={value}
       readOnly
-      className="w-full mt-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md"
+      className="w-full mt-1 px-3 py-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md transition-all duration-500"
     />
   </div>
 );

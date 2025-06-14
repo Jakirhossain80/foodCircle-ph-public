@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../firebase.config";
-import axiosSecure from "../api/axiosSecure"; // JWT secured axios instance
+import axiosSecure from "../api/axiosSecure";
 import Loading from "../utils/Loading";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
@@ -15,7 +15,6 @@ const ManageMyFoods = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Ensure route protection
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (u) => {
       if (u) setUser(u);
@@ -24,7 +23,6 @@ const ManageMyFoods = () => {
     return unsubscribe;
   }, [navigate]);
 
-  // Fetch user-specific foods using JWT-secured axios
   useEffect(() => {
     if (!user) return;
 
@@ -49,7 +47,7 @@ const ManageMyFoods = () => {
       text: "This will be deleted permanently!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#00c853 ",
+      confirmButtonColor: "#00c853",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete!",
     }).then((res) => {
@@ -68,14 +66,14 @@ const ManageMyFoods = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <h1 className="text-2xl font-semibold text-green-600 mb-6 text-center font-poppins">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 transition-all duration-500">
+      <h1 className="text-2xl font-semibold text-green-600 dark:text-green-400 mb-6 text-center font-poppins transition-all duration-500">
         Manage My Foods
       </h1>
 
-      <div className="overflow-x-auto">
-        <table className="w-full bg-white shadow-md rounded">
-          <thead className="bg-green-500 text-white">
+      <div className="overflow-x-auto transition-all duration-500">
+        <table className="w-full bg-white dark:bg-gray-800 shadow-md rounded transition-all duration-500">
+          <thead className="bg-green-500 text-white transition-all duration-500">
             <tr>
               <th className="py-2 px-4">#</th>
               <th className="py-2 px-4">Image</th>
@@ -88,7 +86,10 @@ const ManageMyFoods = () => {
           </thead>
           <tbody>
             {foods.map((food, i) => (
-              <tr key={food._id} className="text-gray-700 border-b text-center">
+              <tr
+                key={food._id}
+                className="text-gray-700 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700 text-center transition-all duration-500"
+              >
                 <td className="py-2 px-4">{i + 1}</td>
                 <td className="py-2 px-4">
                   <img
@@ -106,13 +107,13 @@ const ManageMyFoods = () => {
                 <td className="py-2 px-4 space-x-6">
                   <button
                     onClick={() => navigate(`/updatefood/${food._id}`)}
-                    className="text-amber-500 hover:text-amber-700 cursor-pointer duration-300 p-2"
+                    className="text-amber-500 hover:text-amber-600 dark:hover:text-amber-400 cursor-pointer duration-300 p-2 transition-all"
                   >
                     <FaEdit size={22} />
                   </button>
                   <button
                     onClick={() => handleDelete(food._id)}
-                    className="text-rose-500 hover:text-rose-700 cursor-pointer duration-300 p-2"
+                    className="text-rose-500 hover:text-rose-600 dark:hover:text-rose-400 cursor-pointer duration-300 p-2 transition-all"
                   >
                     <FaTrash size={22} />
                   </button>
@@ -121,7 +122,10 @@ const ManageMyFoods = () => {
             ))}
             {foods.length === 0 && (
               <tr>
-                <td colSpan="7" className="py-4">
+                <td
+                  colSpan="7"
+                  className="py-4 text-center text-gray-600 dark:text-gray-400 transition-all duration-500"
+                >
                   No foods found. Try adding some!
                 </td>
               </tr>

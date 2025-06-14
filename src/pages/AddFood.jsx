@@ -5,7 +5,7 @@ import app from "../firebase.config";
 import Loading from "../utils/Loading";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axiosSecure from "../api/axiosSecure";  // ✅ Imported axiosSecure
+import axiosSecure from "../api/axiosSecure";
 
 const auth = getAuth(app);
 
@@ -26,7 +26,6 @@ const AddFood = () => {
 
   const queryClient = useQueryClient();
 
-  // Set user info from Firebase auth
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -37,7 +36,6 @@ const AddFood = () => {
           userImage: user.photoURL,
         }));
 
-        // ✅ JWT secured request using axiosSecure
         const fetchMyFoods = async () => {
           const response = await axiosSecure.get(`/myfoods?email=${user.email}`);
           console.log(response.data);
@@ -51,7 +49,6 @@ const AddFood = () => {
     return () => unsubscribe();
   }, []);
 
-  // Mutation with React Query
   const { mutate, isPending } = useMutation({
     mutationFn: async (newFood) => {
       const res = await axios.post("http://localhost:3000/foods", newFood);
@@ -101,105 +98,105 @@ const AddFood = () => {
   if (loading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-3xl mx-auto bg-white p-10 rounded-md shadow-md">
-        <h2 className="text-2xl font-bold text-green-600 mb-6 text-center font-[Poppins]">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 transition-all duration-500">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-10 rounded-md shadow-md transition-all duration-500">
+        <h2 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-6 text-center font-[Poppins] transition-all duration-500">
           Share Surplus Food
         </h2>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Food Name</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Food Name</label>
             <input
               type="text"
               name="foodName"
               value={formData.foodName}
               onChange={handleChange}
               required
-              className="w-full border p-3 rounded-md"
+              className="w-full border p-3 rounded-md bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600 transition-all duration-500"
               placeholder="e.g., Chicken Curry"
             />
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Quantity (Servings)</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Quantity (Servings)</label>
             <input
               type="text"
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
               required
-              className="w-full border p-3 rounded-md"
+              className="w-full border p-3 rounded-md bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600 transition-all duration-500"
               placeholder="e.g., 5 servings"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block mb-2 font-semibold text-gray-700">Pickup Location</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Pickup Location</label>
             <input
               type="text"
               name="location"
               value={formData.location}
               onChange={handleChange}
               required
-              className="w-full border p-3 rounded-md"
+              className="w-full border p-3 rounded-md bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600 transition-all duration-500"
               placeholder="e.g., 123 Main St, NY"
             />
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Expiration Date & Time</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Expiration Date & Time</label>
             <input
               type="datetime-local"
               name="expireAt"
               value={formData.expireAt}
               onChange={handleChange}
               required
-              className="w-full border p-3 rounded-md"
+              className="w-full border p-3 rounded-md bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600 transition-all duration-500"
             />
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Food Image URL</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Food Image URL</label>
             <input
               type="text"
               name="foodImage"
               value={formData.foodImage}
               onChange={handleChange}
-              className="w-full border p-3 rounded-md"
+              className="w-full border p-3 rounded-md bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600 transition-all duration-500"
               placeholder="Paste image URL"
             />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block mb-2 font-semibold text-gray-700">Additional Note</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Additional Note</label>
             <textarea
               name="note"
               value={formData.note}
               onChange={handleChange}
               rows="4"
-              className="w-full border p-3 rounded-md"
+              className="w-full border p-3 rounded-md bg-white dark:bg-gray-700 dark:text-white border-gray-300 dark:border-gray-600 transition-all duration-500"
               placeholder="e.g., Vegetarian, contains nuts, spicy, etc."
             ></textarea>
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Your Name</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Your Name</label>
             <input
               type="text"
               value={formData.userName}
               readOnly
-              className="w-full border p-3 rounded-md bg-gray-100 text-gray-600"
+              className="w-full border p-3 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 transition-all duration-500"
             />
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold text-gray-700">Your Email</label>
+            <label className="block mb-2 font-semibold text-gray-700 dark:text-gray-200 transition-all duration-500">Your Email</label>
             <input
               type="email"
               value={formData.userEmail}
               readOnly
-              className="w-full border p-3 rounded-md bg-gray-100 text-gray-600"
+              className="w-full border p-3 rounded-md bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300 transition-all duration-500"
             />
           </div>
 

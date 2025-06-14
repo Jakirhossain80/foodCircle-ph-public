@@ -70,9 +70,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/updatefood/:id",
-        element: <UpdateFoodInfo />,
+         path: "/updatefood/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateFoodInfo />
+          </PrivateRoute>
+        ),
       },
+     
       {
         path: "/learnmore",
         element: <LearnMore />,

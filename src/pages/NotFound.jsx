@@ -5,18 +5,16 @@ import LottieAnimation from "../components/LottieAnimation";
 
 const NotFound = () => {
   return (
-    <div className="bg-gray-50 min-h-[450px] flex flex-col items-center justify-center px-4 py-12 my-10 text-center">
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-[450px] flex flex-col items-center justify-center px-4 py-12 my-10 text-center transition-all duration-500">
       <LottieAnimation
         animationData={notFoundAnimation}
         width="800px"
         height="500px"
       />
-      {/* Illustration */}
 
-      {/* Button */}
       <Link
         to="/"
-        className="bg-green-600 text-white px-6 py-2 mt-6 rounded hover:bg-green-700 transition duration-300"
+        className="bg-green-600 text-white px-6 py-2 mt-6 rounded hover:bg-green-700 transition-all duration-500"
       >
         Go Back Home
       </Link>

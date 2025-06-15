@@ -53,9 +53,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full sm:w-96 bg-white p-8 rounded-xl shadow-md">
-        <h2 className="text-xl font-extrabold text-green-600 mb-6 font-[Poppins] text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 transition-all duration-500">
+      <div className="w-full sm:w-96 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md transition-all duration-500">
+        <h2 className="text-xl font-extrabold text-green-600 dark:text-green-400 mb-6 font-[Poppins] text-center transition-all duration-500">
           Login to FoodCircle
         </h2>
 
@@ -63,7 +63,7 @@ const Login = () => {
           <input
             type="email"
             placeholder="Email"
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-all duration-500"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -71,14 +71,14 @@ const Login = () => {
           <input
             type="password"
             placeholder="Password"
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-all duration-500"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-200 flex items-center justify-center cursor-pointer"
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition-all duration-500 flex items-center justify-center cursor-pointer"
             disabled={loading}
           >
             {loading ? (
@@ -89,21 +89,21 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="my-4 text-center text-gray-400">or</div>
+        <div className="my-4 text-center text-gray-400 dark:text-gray-500 transition-all duration-500">or</div>
 
         <button
           onClick={handleGoogleLogin}
-          className="w-full bg-white text-gray-800 border py-2 px-4 rounded hover:bg-gray-100 transition flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full bg-white dark:bg-gray-700 dark:text-gray-200 border dark:border-gray-600 py-2 px-4 rounded hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-500 flex items-center justify-center gap-2 cursor-pointer"
         >
           <FcGoogle className="text-xl" />
           Continue with Google
         </button>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
+        <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400 transition-all duration-500">
           Don’t have an account?{" "}
           <Link
             to="/registration"
-            className="text-green-600 hover:underline font-medium"
+            className="text-green-600 dark:text-green-400 hover:underline font-medium transition-all duration-500"
           >
             Register here
           </Link>

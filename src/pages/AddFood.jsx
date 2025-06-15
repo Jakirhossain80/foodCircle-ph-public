@@ -51,7 +51,7 @@ const AddFood = () => {
 
   const { mutate, isPending } = useMutation({
     mutationFn: async (newFood) => {
-      const res = await axios.post("http://localhost:3000/foods", newFood);
+      const res = await axiosSecure.post("/foods", newFood);
       return res.data;
     },
     onSuccess: (data) => {

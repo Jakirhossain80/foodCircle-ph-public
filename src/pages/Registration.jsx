@@ -7,7 +7,7 @@ import { updateProfile } from 'firebase/auth';
 
 const Registration = () => {
   const { createUser, setUser } = useContext(AuthContext);
-  const navigate = useNavigate(); // ✅ Initialize navigation
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -61,7 +61,6 @@ const Registration = () => {
       .then((result) => {
         const user = result.user;
 
-        // ✅ Update Firebase profile with name and photoURL
         updateProfile(user, {
           displayName: name,
           photoURL: photoURL,
@@ -73,14 +72,12 @@ const Registration = () => {
               photoURL: photoURL,
             });
 
-            // ✅ Show success alert only after profile update
             Swal.fire({
               icon: 'success',
               title: 'Registration Successful',
               text: `Welcome to HobbyHub, ${name}!`,
             });
 
-            // ✅ Navigate to Home page
             navigate('/');
           })
           .catch((error) => {
@@ -88,18 +85,17 @@ const Registration = () => {
           });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
         Swal.fire('Error', errorMessage, 'error');
       });
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="w-full sm:w-96 bg-white p-8 rounded-xl shadow-md">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4 transition-all duration-500">
+      <div className="w-full sm:w-96 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md transition-all duration-500">
         <div className="text-center mb-6">
-          <FaUserPlus className="text-3xl text-green-600 mx-auto mb-2" />
-          <h2 className="text-2xl font-bold font-[Poppins] text-green-600">
+          <FaUserPlus className="text-3xl text-green-600 dark:text-green-400 mx-auto mb-2 transition-all duration-500" />
+          <h2 className="text-2xl font-bold font-[Poppins] text-green-600 dark:text-green-400 transition-all duration-500">
             Create Your FoodCircle Account
           </h2>
         </div>
@@ -111,7 +107,7 @@ const Registration = () => {
             placeholder="Full Name"
             value={name}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-all duration-500"
           />
 
           <input
@@ -120,7 +116,7 @@ const Registration = () => {
             placeholder="Email"
             value={email}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-all duration-500"
           />
 
           <input
@@ -129,7 +125,7 @@ const Registration = () => {
             placeholder="Photo URL"
             value={photoURL}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full p-3 border rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-green-600 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-all duration-500"
           />
 
           <input
@@ -138,25 +134,25 @@ const Registration = () => {
             placeholder="Password"
             value={password}
             onChange={handleChange}
-            className="w-full p-3 border rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-600"
+            className="w-full p-3 border rounded-md mb-2 focus:outline-none focus:ring-2 focus:ring-green-600 bg-white dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 transition-all duration-500"
           />
           {passwordError && (
-            <p className="text-sm text-red-600 mb-4">{passwordError}</p>
+            <p className="text-sm text-rose-500 mb-4 transition-all duration-500">{passwordError}</p>
           )}
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 cursor-pointer"
+            className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition-all duration-500 cursor-pointer"
           >
             Register
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-600">
+        <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400 transition-all duration-500">
           Already have an account?{' '}
           <Link
             to="/login"
-            className="text-green-600 hover:underline font-medium"
+            className="text-green-600 dark:text-green-400 hover:underline font-medium transition-all duration-500"
           >
             Login here
           </Link>

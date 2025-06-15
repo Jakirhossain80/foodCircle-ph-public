@@ -48,10 +48,11 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   // Signup
-  const createUser = (email, password) => {
-    setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
+  const createUser = async (email, password) => {
+  setLoading(true);
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
 
   // Email/Password login
   const signIn = (email, password) => {

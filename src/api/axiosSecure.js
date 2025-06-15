@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // Create an Axios instance
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://foodcircle-live.vercel.app",
 });
 
 // Intercept requests to automatically attach JWT

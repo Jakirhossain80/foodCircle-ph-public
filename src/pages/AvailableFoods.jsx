@@ -16,7 +16,7 @@ const AvailableFoods = () => {
   const fetchFoods = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`http://localhost:3000/available-foods`, {
+      const response = await axios.get(`https://foodcircle-live.vercel.app/available-foods`, {
         params: { search: searchQuery, sort: sortOrder },
       });
       setFoods(response.data);

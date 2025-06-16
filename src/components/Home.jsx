@@ -5,9 +5,12 @@ import CommunityImpact from "./CommunityImpact";
 import Testimonials from "./Testimonials";
 import JoinTheMovement from "./JoinTheMovement";
 
+
 const Home = () => {
+ 
   return (
     <>
+
       <div>
         <BannerSlider />
       </div>

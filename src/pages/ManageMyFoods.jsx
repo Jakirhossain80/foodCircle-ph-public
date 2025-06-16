@@ -7,9 +7,11 @@ import axiosSecure from "../api/axiosSecure";
 import Loading from "../utils/Loading";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
+
 const auth = getAuth(app);
 
 const ManageMyFoods = () => {
+
   const [user, setUser] = useState(null);
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -67,6 +69,7 @@ const ManageMyFoods = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 transition-all duration-500">
+
       <h1 className="text-2xl font-semibold text-green-600 dark:text-green-400 mb-6 text-center font-poppins transition-all duration-500">
         Manage My Foods
       </h1>

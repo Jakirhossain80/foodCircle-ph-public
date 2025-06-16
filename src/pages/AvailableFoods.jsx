@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { FaSearch, FaSort, FaThList, FaTh } from "react-icons/fa";
 import Loading from "../utils/Loading";
 
+
+
 const AvailableFoods = () => {
   const [foods, setFoods] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ const AvailableFoods = () => {
   const fetchFoods = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://foodcircle-live.vercel.app/available-foods`, {
+      const response = await axios.get(`http://localhost:3000/available-foods`, {
         params: { search: searchQuery, sort: sortOrder },
       });
       setFoods(response.data);
@@ -61,8 +63,14 @@ const AvailableFoods = () => {
     return () => clearTimeout(timeout);
   }, [searchInput]);
 
+   const breadcrumbItems = [
+    { label: "Available Foods", href: "/availablefoods", current: true }
+  ];
+
   return (
+    
     <div className="mx-auto px-4 py-8 font-inter text-gray-800 dark:text-white transition-all duration-500">
+ 
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         {/* Search */}
         <div className="flex items-center gap-2 w-full md:w-auto">

@@ -7,9 +7,11 @@ import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosSecure from "../api/axiosSecure";
 
+
 const auth = getAuth(app);
 
 const AddFood = () => {
+ 
   const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -99,6 +101,7 @@ const AddFood = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4 transition-all duration-500">
+  
       <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 p-10 rounded-md shadow-md transition-all duration-500">
         <h2 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-6 text-center font-[Poppins] transition-all duration-500">
           Share Surplus Food

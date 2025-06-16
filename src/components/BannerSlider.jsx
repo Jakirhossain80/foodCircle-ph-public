@@ -36,7 +36,7 @@ const BannerSlider = () => {
 
   return (
     <div
-      className="w-full h-[300px] md:h-[700px] relative transition-all duration-500"
+      className="w-full h-[300px] md:h-[650px] relative transition-all duration-500"
       onMouseEnter={() => swiperRef.current?.autoplay?.stop()}
       onMouseLeave={() => swiperRef.current?.autoplay?.start()}
     >

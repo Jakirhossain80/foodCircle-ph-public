@@ -63,10 +63,7 @@ const AvailableFoods = () => {
     return () => clearTimeout(timeout);
   }, [searchInput]);
 
-   const breadcrumbItems = [
-    { label: "Available Foods", href: "/availablefoods", current: true }
-  ];
-
+ 
   return (
     
     <div className="mx-auto px-4 py-8 font-inter text-gray-800 dark:text-white transition-all duration-500">

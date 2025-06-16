@@ -79,6 +79,16 @@ const Navbar = () => {
       >
         My Food Request
       </NavLink>
+      <NavLink
+        to="/fooduploadwithai"
+        className={({ isActive }) =>
+          `hover:text-green-600 transition-all duration-500 ${
+            isActive ? "text-green-600 font-medium" : ""
+          }`
+        }
+      >
+        Food Analyze
+      </NavLink>
     </>
   );
 
@@ -202,6 +212,17 @@ const Navbar = () => {
               }
             >
               My Food Request
+            </NavLink>
+            <NavLink
+              to="/fooduploadwithai"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={({ isActive }) =>
+                `hover:text-green-600 transition-all duration-500 ${
+                  isActive ? "text-green-600 font-medium" : ""
+                }`
+              }
+            >
+              Food Analyze
             </NavLink>
           </>
 

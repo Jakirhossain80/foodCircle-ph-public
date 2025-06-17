@@ -25,9 +25,6 @@
   @apply !bg-green-600 opacity-100 !scale-150;
 }
 
-.swa12-confirm {
-  @apply !bg-green-600;
-}
 
 html {
   scroll-behavior: smooth;

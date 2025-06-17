@@ -7,7 +7,7 @@ const FoodUpload = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md max-w-2xl mx-auto my-10">
+    <div className="p-6 bg-white rounded-lg shadow-md max-w-2xl min-h-64 mx-auto my-10">
       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Upload & Analyze Food</h2>
 
       <UploadImage onUpload={setImageUrl} />

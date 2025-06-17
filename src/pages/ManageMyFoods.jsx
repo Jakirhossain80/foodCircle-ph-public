@@ -43,27 +43,51 @@ const ManageMyFoods = () => {
     fetchMyFoods();
   }, [user]);
 
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "This will be deleted permanently!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#00c853",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete!",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        axiosSecure
-          .delete(`/food/${id}`)
-          .then(() => {
-            setFoods((f) => f.filter((e) => e._id !== id));
-            Swal.fire("Deleted!", "Food removed.", "success");
-          })
-          .catch(() => Swal.fire("Error", "Deletion failed.", "error"));
-      }
-    });
-  };
+ const handleDelete = (id) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "This will be deleted permanently!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete!",
+    cancelButtonText: "Cancel",
+    customClass: {
+      confirmButton: 'bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded mr-2',
+      cancelButton: 'bg-rose-500 hover:bg-rose-600 text-white font-semibold px-4 py-2 rounded',
+    },
+    buttonsStyling: false, // disable SweetAlert2's default styles
+  }).then((res) => {
+    if (res.isConfirmed) {
+      axiosSecure
+        .delete(`/food/${id}`)
+        .then(() => {
+          setFoods((f) => f.filter((e) => e._id !== id));
+          Swal.fire({
+            title: "Deleted!",
+            text: "Food removed.",
+            icon: "success",
+            confirmButtonText: "OK",
+            customClass: {
+              confirmButton: 'bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded',
+            },
+            buttonsStyling: false,
+          });
+        })
+        .catch(() => {
+          Swal.fire({
+            title: "Error",
+            text: "Deletion failed.",
+            icon: "error",
+            confirmButtonText: "OK",
+            customClass: {
+              confirmButton: 'bg-rose-500 hover:bg-rose-600 text-white font-semibold px-4 py-2 rounded',
+            },
+            buttonsStyling: false,
+          });
+        });
+    }
+  });
+};
 
   if (loading) return <Loading />;
 

@@ -13,7 +13,7 @@ const FeaturedFoods = () => {
   const { data: foods = [], isLoading, isError } = useQuery({
     queryKey: ["featuredFoods"],
     queryFn: async () => {
-      const res = await axios.get("https://foodcircle-live.vercel.app/featured-foods");
+      const res = await axios.get("https://foodcircle-current.vercel.app/featured-foods");
       return res.data;
     },
   });

@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
         const email = currentUser.email;
         try {
           const { data } = await axios.post(
-            "https://foodcircle-live.vercel.app/jwt",
+            "https://foodcircle-current.vercel.app/jwt",
             { email }
           );
           Cookies.set("foodcircle-token", data.token, { expires: 7 });

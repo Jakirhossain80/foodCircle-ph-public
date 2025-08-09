@@ -35,7 +35,6 @@ In many households and communities, perfectly edible food is discarded due to ov
 - 🔍 Search and filter food items by keywords
 - 🌗 Full-featured Dark/Light mode toggle
 - 🤖 AI Food Freshness Analyzer using Teachable Machine + Cloudinary
-- 🍞 Breadcrumb navigation using Mamba UI
 - 🧪 React Query's `useMutation` used for optimized Add Food operations
 - 🔐 Axios Secure Hook integrated for authenticated data operations
 - 📱 Fully responsive design (mobile-first)
@@ -56,7 +55,7 @@ In many households and communities, perfectly edible food is discarded due to ov
   - `useMutation` used in `AddFood` for form submission
 - **Axios Secure Custom Hook** for token-based API access in:  
   - `AddFood`, `FoodDetails`, `ManageMyFoods`, `MyFoodRequest`, `UpdateFoodInfo`
-- **Mamba UI Breadcrumb** for better navigation UX
+
 
 ### 🧩 Backend
 

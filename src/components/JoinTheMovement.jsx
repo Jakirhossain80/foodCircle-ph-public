@@ -18,6 +18,7 @@ const JoinTheMovement = () => {
         <h2 className="text-3xl md:text-4xl font-bold font-poppins mb-6 transition-all duration-500">
           Join the Movement
         </h2>
+        <p>Test purpose added</p>
         <p className="text-lg md:text-xl mb-10 font-inter transition-all duration-500">
           Every shared meal makes a difference. Become part of the FoodCircle today!
         </p>

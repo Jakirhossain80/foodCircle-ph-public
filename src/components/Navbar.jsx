@@ -49,36 +49,43 @@ const Navbar = () => {
       >
         Available Foods
       </NavLink>
-      <NavLink
-        to="/addfood"
-        className={({ isActive }) =>
-          `hover:text-green-600 transition-all duration-500 ${
-            isActive ? "text-green-600 font-medium" : ""
-          }`
-        }
-      >
-        Add Food
-      </NavLink>
-      <NavLink
-        to="/managemyfoods"
-        className={({ isActive }) =>
-          `hover:text-green-600 transition-all duration-500 ${
-            isActive ? "text-green-600 font-medium" : ""
-          }`
-        }
-      >
-        Manage My Foods
-      </NavLink>
-      <NavLink
-        to="/myfoodrequest"
-        className={({ isActive }) =>
-          `hover:text-green-600 transition-all duration-500 ${
-            isActive ? "text-green-600 font-medium" : ""
-          }`
-        }
-      >
-        My Food Request
-      </NavLink>
+
+      {/* Protected links (desktop) — only show when user is logged in */}
+      {user && (
+        <>
+          <NavLink
+            to="/addfood"
+            className={({ isActive }) =>
+              `hover:text-green-600 transition-all duration-500 ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
+            }
+          >
+            Add Food
+          </NavLink>
+          <NavLink
+            to="/managemyfoods"
+            className={({ isActive }) =>
+              `hover:text-green-600 transition-all duration-500 ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
+            }
+          >
+            Manage My Foods
+          </NavLink>
+          <NavLink
+            to="/myfoodrequest"
+            className={({ isActive }) =>
+              `hover:text-green-600 transition-all duration-500 ${
+                isActive ? "text-green-600 font-medium" : ""
+              }`
+            }
+          >
+            My Food Request
+          </NavLink>
+        </>
+      )}
+
       <NavLink
         to="/fooduploadwithai"
         className={({ isActive }) =>
@@ -180,39 +187,46 @@ const Navbar = () => {
             >
               Available Foods
             </NavLink>
-            <NavLink
-              to="/addfood"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `hover:text-green-600 transition-all duration-500 ${
-                  isActive ? "text-green-600 font-medium" : ""
-                }`
-              }
-            >
-              Add Food
-            </NavLink>
-            <NavLink
-              to="/managemyfoods"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `hover:text-green-600 transition-all duration-500 ${
-                  isActive ? "text-green-600 font-medium" : ""
-                }`
-              }
-            >
-              Manage My Foods
-            </NavLink>
-            <NavLink
-              to="/myfoodrequest"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `hover:text-green-600 transition-all duration-500 ${
-                  isActive ? "text-green-600 font-medium" : ""
-                }`
-              }
-            >
-              My Food Request
-            </NavLink>
+
+            {/* Protected links (mobile) — only show when user is logged in */}
+            {user && (
+              <>
+                <NavLink
+                  to="/addfood"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `hover:text-green-600 transition-all duration-500 ${
+                      isActive ? "text-green-600 font-medium" : ""
+                    }`
+                  }
+                >
+                  Add Food
+                </NavLink>
+                <NavLink
+                  to="/managemyfoods"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `hover:text-green-600 transition-all duration-500 ${
+                      isActive ? "text-green-600 font-medium" : ""
+                    }`
+                  }
+                >
+                  Manage My Foods
+                </NavLink>
+                <NavLink
+                  to="/myfoodrequest"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `hover:text-green-600 transition-all duration-500 ${
+                      isActive ? "text-green-600 font-medium" : ""
+                    }`
+                  }
+                >
+                  My Food Request
+                </NavLink>
+              </>
+            )}
+
             <NavLink
               to="/fooduploadwithai"
               onClick={() => setIsMobileMenuOpen(false)}

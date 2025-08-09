@@ -100,7 +100,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full container bg-[#f9fafb] dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700 px-4 py-10 flex justify-between items-center z-50 transition-all duration-500">
+    <nav className="fixed top-0 left-0 right-0 w-full container bg-[#f9fafb] dark:bg-gray-900  px-4 py-10 flex justify-between items-center z-50 transition-all duration-500">
       {/* Logo and Title */}
       <Link to="/" className="flex items-center gap-2">
         <img src={logoImage} alt="Logo" className="h-8 w-8" />

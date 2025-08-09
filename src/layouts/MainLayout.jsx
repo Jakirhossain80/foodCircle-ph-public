@@ -8,7 +8,7 @@ import ScrollToTop from "../utils/ScrollToTop";
 const MainLayout = () => {
   return (
     <>
-      <header>
+      <header className="border-b border-gray-300 dark:border-gray-700">
         <nav className="py-10">
           <Navbar />
         </nav>

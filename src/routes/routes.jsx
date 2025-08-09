@@ -13,7 +13,7 @@ import UpdateFoodInfo from "../pages/UpdateFoodInfo";
 import LearnMore from "../pages/LearnMore";
 import PrivateRoute from "../provider/PrivateRoute";
 import FoodUpload from "../pages/FoodUpload";
-
+import SingleFoodDetail from "../pages/SingleFoodDetail";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/availablefoods",
         Component: AvailableFoods,
+      },
+      {
+       path:"/foods/:id",
+        Component: SingleFoodDetail,
       },
       {
         path: "/addfood",
@@ -72,14 +76,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-         path: "/updatefood/:id",
+        path: "/updatefood/:id",
         element: (
           <PrivateRoute>
             <UpdateFoodInfo />
           </PrivateRoute>
         ),
       },
-     
+
       {
         path: "/learnmore",
         element: <LearnMore />,
@@ -88,11 +92,11 @@ export const router = createBrowserRouter([
         path: "/fooduploadwithai",
         element: <FoodUpload />,
       },
-
-      {
-        path: "/*",
-        element: <NotFound />,
-      },
     ],
+  },
+
+  {
+    path: "/*",
+    element: <NotFound />,
   },
 ]);

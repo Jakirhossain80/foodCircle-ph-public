@@ -69,6 +69,17 @@ const FeaturedFoods = () => {
             <p className="text-sm text-gray-600 dark:text-gray-300 transition-all duration-500">
               📝 {food.note}
             </p>
+
+            {/* --- NEW: See More button (keeps existing layout) --- */}
+            <div className="mt-4">
+              <Link
+                to={`/foods/${food._id}`}
+                state={{ food }}
+                className="inline-block bg-amber-400 hover:bg-amber-500 text-gray-900 font-medium py-2 px-6 rounded-full transition-all duration-500"
+              >
+                See More
+              </Link>
+            </div>
           </motion.div>
         ))}
       </div>

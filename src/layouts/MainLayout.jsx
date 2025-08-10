@@ -10,7 +10,7 @@ const MainLayout = () => {
     <>
       <header>
         <nav className="border-b border-gray-300 dark:border-gray-700">
-        <div className="py-10">
+        <div className="py-16">
             <Navbar />
         </div>
         </nav>

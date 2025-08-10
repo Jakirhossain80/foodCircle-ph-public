@@ -5,6 +5,7 @@ import CommunityImpact from "./CommunityImpact";
 import Testimonials from "./Testimonials";
 import JoinTheMovement from "./JoinTheMovement";
 import OurMission from "./OurMission";
+import CategoryOfSharedFood from "./CategoryOfSharedFood";
 
 
 const Home = () => {
@@ -15,20 +16,23 @@ const Home = () => {
       <div>
         <BannerSlider />
       </div>
-      <div className="mt-20 mb-32">
+      <div className="my-10">
         <FeaturedFoods />
       </div>
-      <div className="my-20">
+      <div className="mb-10">
         <CommunityImpact />
       </div>
-      <div className="mb-16">
+      <div className="mb-10">
         <Testimonials />
       </div>
-      <div className="mb-20">
+      <div className="mb-10">
         <OurMission />
       </div>
-      <div className="mb-20">
+      <div className="mb-10">
         <JoinTheMovement />
+      </div>
+      <div className="mb-10">
+        <CategoryOfSharedFood />
       </div>
       
     </>

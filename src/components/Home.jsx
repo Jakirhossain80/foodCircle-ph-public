@@ -6,6 +6,7 @@ import Testimonials from "./Testimonials";
 import JoinTheMovement from "./JoinTheMovement";
 import OurMission from "./OurMission";
 import CategoryOfSharedFood from "./CategoryOfSharedFood";
+import SafetyAndQualityGuideline from "./SafetyAndQualityGuideline";
 
 
 const Home = () => {
@@ -33,6 +34,9 @@ const Home = () => {
       </div>
       <div className="mb-10">
         <CategoryOfSharedFood />
+      </div>
+      <div className="mb-10">
+        <SafetyAndQualityGuideline />
       </div>
       
     </>

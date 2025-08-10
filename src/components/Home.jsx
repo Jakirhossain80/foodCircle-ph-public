@@ -21,15 +21,16 @@ const Home = () => {
       <div className="my-20">
         <CommunityImpact />
       </div>
-      <div className="mb-20">
+      <div className="mb-16">
         <Testimonials />
-      </div>
-      <div className="mb-20">
-        <JoinTheMovement />
       </div>
       <div className="mb-20">
         <OurMission />
       </div>
+      <div className="mb-20">
+        <JoinTheMovement />
+      </div>
+      
     </>
   );
 };

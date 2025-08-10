@@ -1,5 +1,6 @@
 // src/components/OurMission.jsx
 import { FaLeaf, FaHandsHelping, FaRecycle, FaUsers, FaShieldAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from "react-router";
 
 const OurMission = () => {
   return (
@@ -117,12 +118,12 @@ const OurMission = () => {
 
         {/* CTA */}
         <div className="mt-10 md:mt-12 text-center">
-          <button
+          <Link to="/login"
             type="button"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-500"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-500 cursor-pointer"
           >
             Join the FoodCircle
-          </button>
+          </Link>
           <p className="mt-2 text-xs text-gray-600 dark:text-gray-400 transition-all duration-500">
             Share food, request help, and be part of a kinder, greener community.
           </p>

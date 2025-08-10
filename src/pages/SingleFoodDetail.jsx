@@ -5,14 +5,20 @@ import Loading from "../utils/Loading";
 
 const fetchFoodById = async (id) => {
   // Fallback fetch if user navigates directly without state
-  const res = await axios.get(`https://foodcircle-current.vercel.app/foods/${id}`);
+  const res = await axios.get(
+    `https://foodcircle-current.vercel.app/foods/${id}`
+  );
   return res.data;
 };
 
 const InfoRow = ({ label, value }) => (
   <div className="flex items-start justify-between gap-3 py-2 border-b border-gray-200 dark:border-gray-700">
-    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">{label}</span>
-    <span className="text-sm text-gray-800 dark:text-gray-100">{value ?? "—"}</span>
+    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+      {label}
+    </span>
+    <span className="text-sm text-gray-800 dark:text-gray-100">
+      {value ?? "—"}
+    </span>
   </div>
 );
 
@@ -23,7 +29,11 @@ const SingleFoodDetail = () => {
   // Prefer data passed via Link state for instant render
   const presetFood = location.state?.food;
 
-  const { data: food, isLoading, isError } = useQuery({
+  const {
+    data: food,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["foodDetails", id],
     queryFn: () => fetchFoodById(id),
     enabled: !presetFood, // skip fetch if we already have it
@@ -33,7 +43,11 @@ const SingleFoodDetail = () => {
 
   if (!item && isLoading) return <Loading />;
   if (!item && isError)
-    return <p className="px-4 py-8 text-center text-rose-500">Failed to load food details.</p>;
+    return (
+      <p className="px-4 py-8 text-center text-rose-500">
+        Failed to load food details.
+      </p>
+    );
 
   return (
     <section className="px-4 py-8 max-w-6xl mx-auto">
@@ -80,15 +94,21 @@ const SingleFoodDetail = () => {
             <InfoRow label="Location" value={item.location} />
             <InfoRow label="Note" value={item.note} />
             {/* Show extra fields when available */}
-            {item?.pickupTime && <InfoRow label="Pickup Time" value={item.pickupTime} />}
-            {item?.donorName && <InfoRow label="Donor" value={item.donorName} />}
+            {item?.pickupTime && (
+              <InfoRow label="Pickup Time" value={item.pickupTime} />
+            )}
+            {item?.donorName && (
+              <InfoRow label="Donor" value={item.donorName} />
+            )}
             {item?.contact && <InfoRow label="Contact" value={item.contact} />}
           </div>
 
           {/* Description */}
           <div className="mt-5">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Description</h3>
-            <p className="text-sm leading-6 text-gray-700 dark:text-gray-300">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+              Description
+            </h3>
+            <p className="text-sm leading-6 text-justify text-gray-700 dark:text-gray-300">
               {item?.description || "No description provided."}
             </p>
           </div>
@@ -100,12 +120,6 @@ const SingleFoodDetail = () => {
               className="sm:hidden inline-block bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-full text-center transition-all duration-300"
             >
               Back to All
-            </Link>
-            <Link
-              to={`/request/${item._id}`}
-              className="inline-block bg-amber-400 hover:bg-amber-500 text-gray-900 font-medium py-2 px-5 rounded-full text-center transition-all duration-300"
-            >
-              Request This Food
             </Link>
           </div>
         </div>

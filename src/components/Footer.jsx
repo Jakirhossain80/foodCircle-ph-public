@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 border-t border-gray-200 dark:border-gray-700 mt-10 transition-all duration-500">
       <motion.div
-        className="max-w-full mx-auto px-4 py-10 grid gap-8 md:grid-cols-3 transition-all duration-500"
+        className="max-w-[1500px] mx-auto px-4 py-10 grid gap-8 md:grid-cols-3 transition-all duration-500"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}

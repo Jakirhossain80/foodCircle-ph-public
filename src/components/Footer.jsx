@@ -91,10 +91,10 @@ const Footer = () => {
 
         {/* Social Media */}
         <div className="font-inter">
-          <h3 className="text-lg font-semibold text-green-600 mb-2">
+          <h3 className="text-lg font-semibold text-green-600 mb-2 text-right">
             Follow Us
           </h3>
-          <div className="flex gap-4 mt-2">
+          <div className="flex justify-end gap-4 mt-2">
             <motion.a
               whileHover={{ scale: 1.15 }}
               whileTap={{ scale: 0.95 }}

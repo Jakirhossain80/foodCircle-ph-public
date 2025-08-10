@@ -4,6 +4,7 @@ import FeaturedFoods from "./FeaturedFoods";
 import CommunityImpact from "./CommunityImpact";
 import Testimonials from "./Testimonials";
 import JoinTheMovement from "./JoinTheMovement";
+import OurMission from "./OurMission";
 
 
 const Home = () => {
@@ -25,6 +26,9 @@ const Home = () => {
       </div>
       <div className="mb-20">
         <JoinTheMovement />
+      </div>
+      <div className="mb-20">
+        <OurMission />
       </div>
     </>
   );

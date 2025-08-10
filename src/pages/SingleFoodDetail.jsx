@@ -67,16 +67,16 @@ const SingleFoodDetail = () => {
       {/* Content: mobile-first, two-column on md+ */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Image */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden">
           <img
             src={item.foodImage}
             alt={item.foodName}
-            className="w-full h-72 md:h-[26rem] object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
 
         {/* Details */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6">
           <div className="flex items-center gap-2 mb-4">
             <span className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-lime-400 text-gray-900">
               Featured

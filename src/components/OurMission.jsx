@@ -41,7 +41,7 @@ const OurMission = () => {
           </article>
 
           {/* Card 2 */}
-          <article className="bg-white dark:bg-gray-8 00 rounded-2xl shadow p-6 transition-all duration-500">
+          <article className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 transition-all duration-500">
             <div className="flex items-center gap-3">
               <span className="inline-flex p-3 rounded-xl bg-amber-400/20 dark:bg-amber-400/25 transition-all duration-500">
                 <FaHandsHelping className="text-amber-500 text-xl transition-all duration-500" aria-hidden />

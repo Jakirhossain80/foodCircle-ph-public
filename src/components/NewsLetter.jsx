@@ -1,7 +1,37 @@
 // src/components/NewsLetter.jsx
+import { useState, useRef } from "react";
+import Swal from "sweetalert2";
 import { FaEnvelopeOpenText, FaCheckCircle, FaShieldAlt } from "react-icons/fa";
 
 const NewsLetter = () => {
+  const [email, setEmail] = useState("");
+  const formRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const trimmed = email.trim();
+    if (!trimmed) {
+      Swal.fire({
+        icon: "error",
+        title: "Please add your email",
+        confirmButtonColor: "#16a34a", // Tailwind green-600
+      });
+      return;
+    }
+
+    Swal.fire({
+      icon: "success",
+      title: "Thank you!",
+      text: "You have been subscribed to our newsletter.",
+      confirmButtonColor: "#16a34a",
+    }).then(() => {
+      // Clear/reset the form fields
+      setEmail("");
+      if (formRef.current) formRef.current.reset();
+    });
+  };
+
   return (
     <section
       className="w-full bg-gray-50 dark:bg-gray-900 transition-all duration-500"
@@ -27,9 +57,9 @@ const NewsLetter = () => {
         {/* Form */}
         <div className="mt-8 max-w-2xl mx-auto">
           <form
+            ref={formRef}
             className="grid gap-4 sm:grid-cols-[1fr_auto]"
-            // no submit logic by design — this is a presentational component
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
             aria-label="Newsletter subscription form"
           >
             <div className="relative">
@@ -42,11 +72,13 @@ const NewsLetter = () => {
                 placeholder="Enter your email address"
                 className="w-full pl-11 pr-4 py-3 rounded-full bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500 transition-all duration-500"
                 aria-label="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <button
               type="submit"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-500"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-500 cursor-pointer"
             >
               Subscribe
             </button>

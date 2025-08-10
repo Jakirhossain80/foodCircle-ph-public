@@ -6,16 +6,13 @@ import Testimonials from "./Testimonials";
 import JoinTheMovement from "./JoinTheMovement";
 import OurMission from "./OurMission";
 import CategoryOfSharedFood from "./CategoryOfSharedFood";
-import SafetyAndQualityGuideline from "./SafetyAndQualityGuideline";
 import PartnersAndSponsors from "./PartnersAndSponsors";
 import NewsLetter from "./NewsLetter";
-
+import SafetyAndQualityGuideline from "./SafetyAndQualityGuideline";
 
 const Home = () => {
- 
   return (
     <>
-
       <div>
         <BannerSlider />
       </div>
@@ -34,19 +31,19 @@ const Home = () => {
       <div className="mb-10">
         <JoinTheMovement />
       </div>
-      <div className="mb-10">
+      <div className="mb-5">
         <CategoryOfSharedFood />
       </div>
-      <div className="mb-10">
+      <div className="mb-5">
         <SafetyAndQualityGuideline />
       </div>
-      <div className="mb-10">
+
+      <div className="mb-5">
         <PartnersAndSponsors />
       </div>
-      <div className="mb-10">
+      <div className="mb-5">
         <NewsLetter />
       </div>
-      
     </>
   );
 };

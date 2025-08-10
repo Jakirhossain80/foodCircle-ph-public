@@ -13,49 +13,84 @@ import {
 
 const cards = [
   {
-    icon: <FaShieldAlt className="text-green-600 dark:text-green-500 text-xl transition-all duration-500" aria-hidden />,
+    icon: (
+      <FaShieldAlt
+        className="text-green-600 dark:text-green-500 text-xl transition-all duration-500"
+        aria-hidden
+      />
+    ),
     title: "Clean & Safe Handling",
     desc: "Wash hands, utensils, and surfaces before preparing or packing food. Keep raw and cooked items separate.",
     pill: "Hygiene first",
     pillClass: "bg-lime-400 text-gray-900",
   },
   {
-    icon: <FaClipboardList className="text-amber-500 text-xl transition-all duration-500" aria-hidden />,
+    icon: (
+      <FaClipboardList
+        className="text-amber-500 text-xl transition-all duration-500"
+        aria-hidden
+      />
+    ),
     title: "Label Clearly",
     desc: "Include item name, prepared/opened date, best-before date, and storage instructions on every package.",
     pill: "Clear labels",
     pillClass: "bg-amber-400 text-gray-900",
   },
   {
-    icon: <FaThermometerHalf className="text-green-600 dark:text-green-500 text-xl transition-all duration-500" aria-hidden />,
+    icon: (
+      <FaThermometerHalf
+        className="text-green-600 dark:text-green-500 text-xl transition-all duration-500"
+        aria-hidden
+      />
+    ),
     title: "Right Temperature",
     desc: "Keep cold foods at ≤ 4°C and hot foods at ≥ 60°C until handover. Use insulated bags when possible.",
     pill: "Stay in the safe zone",
     pillClass: "bg-lime-400 text-gray-900",
   },
   {
-    icon: <FaBoxOpen className="text-green-600 dark:text-green-500 text-xl transition-all duration-500" aria-hidden />,
+    icon: (
+      <FaBoxOpen
+        className="text-green-600 dark:text-green-500 text-xl transition-all duration-500"
+        aria-hidden
+      />
+    ),
     title: "Secure Packaging",
     desc: "Use clean, food-grade containers. Seal tightly to avoid spills and cross-contamination during transport.",
     pill: "No leaks",
     pillClass: "bg-lime-400 text-gray-900",
   },
   {
-    icon: <FaClock className="text-amber-500 text-xl transition-all duration-500" aria-hidden />,
+    icon: (
+      <FaClock
+        className="text-amber-500 text-xl transition-all duration-500"
+        aria-hidden
+      />
+    ),
     title: "Share While Fresh",
     desc: "Only share items that are fresh and safe to eat. Avoid food past its use-by date or with off smells.",
     pill: "Freshness matters",
     pillClass: "bg-amber-400 text-gray-900",
   },
   {
-    icon: <FaInfoCircle className="text-green-600 dark:text-green-500 text-xl transition-all duration-500" aria-hidden />,
+    icon: (
+      <FaInfoCircle
+        className="text-green-600 dark:text-green-500 text-xl transition-all duration-500"
+        aria-hidden
+      />
+    ),
     title: "Allergen Disclosure",
     desc: "Clearly mention common allergens (e.g., nuts, dairy, gluten, eggs, soy) and possible cross-contact.",
     pill: "Allergy info",
     pillClass: "bg-lime-400 text-gray-900",
   },
   {
-    icon: <FaLeaf className="text-green-600 dark:text-green-500 text-xl transition-all duration-500" aria-hidden />,
+    icon: (
+      <FaLeaf
+        className="text-green-600 dark:text-green-500 text-xl transition-all duration-500"
+        aria-hidden
+      />
+    ),
     title: "Dietary Notes",
     desc: "Mark vegetarian/vegan/halal where relevant. Be honest about ingredients and preparation methods.",
     pill: "Be transparent",
@@ -79,8 +114,8 @@ const SafetyAndQualityGuideline = () => {
             Safety & Quality Guidelines
           </h2>
           <p className="mt-3 text-gray-700 dark:text-gray-300 font-inter transition-all duration-500">
-            FoodCircle is built on trust. Please follow these simple guidelines to keep sharing safe,
-            transparent, and sustainable for everyone.
+            FoodCircle is built on trust. Please follow these simple guidelines
+            to keep sharing safe, transparent, and sustainable for everyone.
           </p>
         </div>
 
@@ -119,7 +154,10 @@ const SafetyAndQualityGuideline = () => {
         <div className="mt-10 md:mt-12 grid gap-5 md:grid-cols-2">
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 transition-all duration-500">
             <div className="flex items-center gap-2 mb-3">
-              <FaCheckCircle className="text-green-600 dark:text-green-500 text-lg transition-all duration-500" aria-hidden />
+              <FaCheckCircle
+                className="text-green-600 dark:text-green-500 text-lg transition-all duration-500"
+                aria-hidden
+              />
               <h4 className="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 transition-all duration-500">
                 Do
               </h4>
@@ -134,32 +172,24 @@ const SafetyAndQualityGuideline = () => {
 
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6 transition-all duration-500">
             <div className="flex items-center gap-2 mb-3">
-              <FaTimesCircle className="text-rose-500 text-lg transition-all duration-500" aria-hidden />
+              <FaTimesCircle
+                className="text-rose-500 text-lg transition-all duration-500"
+                aria-hidden
+              />
               <h4 className="text-base md:text-lg font-semibold text-gray-800 dark:text-gray-100 transition-all duration-500">
                 Don’t
               </h4>
             </div>
             <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700 dark:text-gray-300 transition-all duration-500">
-              <li>Share food that smells off, is moldy, or past its use-by date.</li>
+              <li>
+                Share food that smells off, is moldy, or past its use-by date.
+              </li>
               <li>Mix raw and cooked foods in the same container.</li>
-              <li>Share food with undeclared allergens or unclear ingredients.</li>
+              <li>
+                Share food with undeclared allergens or unclear ingredients.
+              </li>
               <li>Refreeze previously thawed perishable items.</li>
             </ul>
-          </div>
-        </div>
-
-        {/* Footer note / CTA */}
-        <div className="mt-8 md:mt-10 text-center">
-          <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 transition-all duration-500">
-            Unsure about an item? When in doubt, leave it out. Safety comes first—for you and your neighbors.
-          </p>
-          <div className="mt-4">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-500"
-            >
-              View Full Guidelines
-            </button>
           </div>
         </div>
       </div>

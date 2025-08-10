@@ -1,5 +1,6 @@
 // src/components/PartnersAndSponsors.jsx
 import { FaHandshake, FaBuilding, FaHeart, FaGlobeAsia, FaLeaf } from "react-icons/fa";
+import { Link } from "react-router";
 
 const partnerGroups = [
   {
@@ -115,12 +116,12 @@ const PartnersAndSponsors = () => {
 
         {/* CTA */}
         <div className="mt-10 md:mt-12 text-center">
-          <button
+          <Link to="/login"
             type="button"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-500"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-500 cursor-pointer"
           >
             Become a Partner
-          </button>
+          </Link>
           <p className="mt-2 text-xs md:text-sm text-gray-600 dark:text-gray-400 transition-all duration-500">
             Interested in partnering or sponsoring? Let’s build a kinder, greener community.
           </p>
